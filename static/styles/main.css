@@ -69,9 +69,19 @@ nav .navbar-brand #logo {
 }
 
 .dams-container {
-    height: 200px;
+    height: 250px;
     margin-top: 70px;
-    background: blueviolet;
+    text-align: center;
+    background: url("../images/dam_sample3.jpg") no-repeat center;
+    margin-top: 70px;
+    padding-top: 40px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: whitesmoke;
+    text-shadow: 4px 4px 16px #000
+}
+
+.dams-container h1 {
+    font-size: 60px;
 }
 
 /* Styles for the dam information table */
@@ -94,4 +104,21 @@ nav .navbar-brand #logo {
   .dam_info tr:nth-child(even) {
     background-color: #f9f9f9; /* Alternate row colors for better visual separation */
   }
+
+  .dam_background {
+    padding: 20px;
+    background-color: rgb(238, 235, 236);
+  }
   
+  .graph1, .graph2, .graph3 {
+    height: 150px;
+    background-color: aqua;
+    margin: 10px;
+    text-align: center;
+    color: whitesmoke;
+    text-shadow: 2px 2px 4px #000;
+  }
+
+  .graphs_container h2 {
+    line-height: 150px;
+  }

@@ -1,9 +1,10 @@
 from models.dams import Base, Dams, DamData, engine
+from sqlalchemy.orm import sessionmaker
 
 
-# Session = sessionmaker(bind=engine)
+Session = sessionmaker(bind=engine)
 
-# session = Session()
+session = Session()
 
 def results_to_dict_list(results):
     """

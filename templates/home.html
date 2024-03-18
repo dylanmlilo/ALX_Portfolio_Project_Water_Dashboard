@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="main_container">
+  <div class="main-heading">
+    <h1>City of Bulawayo Water Dashboard</h1>
+    <h2>Water Supply and Distribution Statistics</h2>
+  </div>
+  <div class="main_graph">
+    {% include 'dam_data.html' %}
+  </div>
+  <div class="additional-content">
+    <p>Here's some additional information about the water dashboard...</p>
+  </div>
+</div>
+{% endblock %}

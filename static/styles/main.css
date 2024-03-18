@@ -1,0 +1,97 @@
+body {
+    margin: 0 0 80px 0!important;
+    padding: 0;
+    box-sizing: border-box;
+    /* display: flex; */
+    /* min-height: 100vh; */
+}
+
+.main-heading {
+    background: url("../images/dam_sample3.jpg") no-repeat center;
+    height: 300px;
+    margin-top: 70px;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.main-heading h1 {
+    font-size: 60px;
+    color: whitesmoke;
+    text-shadow: 2px 2px 4px #000;
+    padding-top: 40px;
+}
+
+.test {
+    height: 100px;
+    background: rgba(5, 59, 141, 0.767);
+}
+
+.main-heading h2 {
+    color: whitesmoke;
+    text-shadow: 4px 4px 16px #000;
+    font-size: 40px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(5, 59, 141, 0.767);
+}
+
+.footer a, .footer p {
+    color: whitesmoke!important;
+}
+
+.navbar {
+    height: 70px;
+    padding: 0px 0px 5px;
+}
+
+nav .navbar-brand #logo {
+    width: 36px;
+    height: 45px;
+    margin: 10px;
+}
+
+#navbarNav .navbar-nav .nav-item .nav-link {
+   margin-top: 20px;
+}
+
+.search_bar {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.main_graph {
+    width: 100%;
+    background-color: rgb(206, 188, 194);
+}
+
+.dams-container {
+    height: 200px;
+    margin-top: 70px;
+    background: blueviolet;
+}
+
+/* Styles for the dam information table */
+.dam_info table {
+    width: 100%; /* Make the table fill the available width */
+    border-collapse: collapse; /* Remove borders between table cells */
+  }
+  
+  .dam_info th, .dam_info td {
+    padding: 10px; /* Add padding for better readability */
+    text-align: left; /* Align content to the left */
+    border: 1px solid #ddd; /* Add a thin border to each cell */
+  }
+  
+  .dam_info th {
+    background-color: #f2f2f2; /* Light gray background for headers */
+    font-weight: bold; /* Make headers bolder */
+  }
+  
+  .dam_info tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternate row colors for better visual separation */
+  }
+  

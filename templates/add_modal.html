@@ -1,0 +1,63 @@
+{% block content %}
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Data</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for category, message in messages %}
+                            <li class="flash {{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+            
+            </div>
+            <div class="modal-body">
+                <form action="{{ url_for('insert_dam_data') }}" method="post">
+                    <div class="form-group">
+                        <label>Date <span style="color: red;">*</span></label>
+                        <input type="date" class="form-control" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label> Select Dam <span style="color: red;">*</span></label>
+                        <select class="form-control" name="dam_id" required>
+                            <option value="1">Inyankuni Dam</option>
+                            <option value="2">Insiza Mayfair Dam</option>
+                            <option value="3">Mtshabezi Dam</option>
+                            <option value="4">uMzingwane Dam</option>
+                            <option value="5">Lower Ncema Dam</option>
+                            <option value="6">Upper Ncema Dam</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Dam Reading <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" name="dam_reading" pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Dam Percentage <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" name="dam_percentage" pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Dam Volume <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" name="dam_volume" pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Daily Inflow</label>
+                        <input type="text" class="form-control" name="daily_inflow" pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

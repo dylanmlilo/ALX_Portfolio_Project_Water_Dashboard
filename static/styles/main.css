@@ -122,3 +122,11 @@ nav .navbar-brand #logo {
   .graphs_container h2 {
     line-height: 150px;
   }
+
+  .dam_data_container {
+    margin-top: 70px;
+  }
+
+  .dam_data_container .btn {
+    float: right;
+  }

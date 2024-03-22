@@ -19,7 +19,8 @@ def results_to_dict_list(results):
                 if column.name != '_sa_instance_state':
                     result_dict[column.name] = getattr(table_obj, column.name)
         result_list.append(result_dict)
-    return result_list
+        sorted_result_list = sorted(result_list, key=lambda x: x["id"])
+    return sorted_result_list
 
 
 # dams_data = session.query(Dams, DamData).join(DamData, Dams.id == DamData.dam_id).all()
@@ -42,6 +43,6 @@ def dams_dicts(dams):
 
 # print(dams_to_dicts)
 # print("----------")
-# print(dam_data_to_dict[0])
+# print(dam_data_to_dict)
 
 

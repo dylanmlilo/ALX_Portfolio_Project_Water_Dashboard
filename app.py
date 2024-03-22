@@ -1,8 +1,9 @@
-from flask import Flask, render_template, abort, jsonify, request, redirect, url_for
+from flask import Flask, render_template, abort, jsonify, request, redirect, url_for, flash
 from database import results_to_dict_list, dams_dicts, session
 from models.dams import Base, Dams, DamData, engine
 
 app = Flask(__name__)
+app.secret_key = 'Sherry123#'
 
 
 @app.route('/', strict_slashes=False)
@@ -29,7 +30,48 @@ def dam(dam_id):
         if dam['id'] == dam_id:
             return render_template('dam_page.html', dam=dam)
     abort(404)
+    
+@app.route('/dam_data', strict_slashes=False)
+def dam_data():
+    dams_data = session.query(Dams, DamData).join(DamData, Dams.id == DamData.dam_id).all()
+    dam_data = results_to_dict_list(dams_data)
 
+    return render_template('dam_data.html', dam_data_list=dam_data)
+
+@app.route('/insert_dam_data', methods=['POST'])
+def insert_dam_data():
+    if request.method == 'POST':
+        try:
+            dam_id = request.form.get('dam_id')
+            date = request.form.get('date')
+            dam_reading = request.form.get('dam_reading')
+            dam_percentage = request.form.get('dam_percentage')
+            dam_volume = request.form.get('dam_volume')
+            daily_inflow = request.form.get('daily_inflow')
+
+            # Validation checks
+            errors = []
+
+            if not daily_inflow:
+                daily_inflow = None
+            else:
+                try:
+                    daily_inflow = float(daily_inflow)
+                except ValueError:
+                    errors.append("daily_inflows must be a valid number")
+
+            if errors:
+                return jsonify({'errors': errors}), 400
+
+            new_dam_record = DamData(dam_id=dam_id, date=date, dam_reading=dam_reading, dam_percentage=dam_percentage, dam_volume=dam_volume, daily_inflow=daily_inflow)
+            session.add(new_dam_record)
+            session.commit()
+            flash('Data inserted successfully')
+            return redirect(url_for('dam_data'))
+
+        except Exception as e:
+            session.rollback()
+            return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -5,8 +5,20 @@
     <h1>{{ dam['dam_name'] }}</h1>
 </div>
 <div class="dam_background">
-    <!-- <p>{{ dam['dam_desc'] }}</p> -->
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu leo purus. Maecenas euismod semper magna nec blandit. In hac habitasse platea dictumst. Vivamus vestibulum est laoreet sapien scelerisque interdum. Donec placerat quam in pulvinar hendrerit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+</div>
+<div class="container h-100 d-flex justify-content-center align-items-center dam_percentage_container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Today's Dam Percentage</h5>
+                    <p class="card-text">{{ dam_percentage }}%</p>
+                    <p class="card-text">{{ today_date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="graphs_container">
     <div class="graph1">

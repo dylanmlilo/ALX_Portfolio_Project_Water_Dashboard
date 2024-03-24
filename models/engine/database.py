@@ -1,6 +1,12 @@
-from models.dams import Base, Dams, DamData, engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy import create_engine
 
+
+db_connection_string = "mysql+pymysql://root:Sherry123#@127.0.0.1/bcc_water_data?charset=utf8mb4"
+
+engine = create_engine(db_connection_string)
+
+Base = declarative_base()
 
 Session = sessionmaker(bind=engine)
 

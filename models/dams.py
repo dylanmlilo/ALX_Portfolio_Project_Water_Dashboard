@@ -1,14 +1,5 @@
-import sqlalchemy
-from sqlalchemy import create_engine,  Column, Integer, String, Float, Date, PrimaryKeyConstraint, DECIMAL
-from sqlalchemy.orm import declarative_base
-
-
-db_connection_string = "mysql+pymysql://root:Sherry123#@127.0.0.1/bcc_water_data?charset=utf8mb4"
-
-engine = create_engine(db_connection_string)
-
-
-Base = declarative_base()
+from sqlalchemy import Column, Integer, String, Float, Date, PrimaryKeyConstraint, DECIMAL
+from models.engine.database import Base, engine, session
 
 
 class Dams(Base):
@@ -34,4 +25,4 @@ class DamData(Base):
     def __repr__(self):
         return f"<DamData(dam_id={self.dam_id}, date={self.date}, dam_reading={self.dam_reading}, dam_percentage={self.dam_percentage}, dam_volume={self.dam_volume}, daily_inflow={self.daily_inflow})>"
 
-Base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)

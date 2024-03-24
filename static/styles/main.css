@@ -54,9 +54,14 @@ nav .navbar-brand #logo {
     margin: 10px;
 }
 
-#navbarNav .navbar-nav .nav-item .nav-link {
-   margin-top: 20px;
+.navbarNav .navbar-nav .nav-item .nav-link {
+   margin: 0px 3px 5px 3px;
 }
+
+.navbarNav .navbar-nav .nav-item .btn {
+  margin: 0px 0px 0px 4px; 
+}
+
 
 .search_bar {
     margin-right: 10px;
@@ -129,4 +134,14 @@ nav .navbar-brand #logo {
 
   .dam_data_container .btn {
     float: right;
+  }
+
+  .dam_percentage_container {
+    margin-top: 20px;
+    padding: 2rem;
+  }
+
+  .dam_percentage_container .card-body {
+    background-color: #e0ffff;  /* Light blue color */
+    border-radius: 5px;
   }

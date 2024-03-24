@@ -6,10 +6,14 @@ body {
     /* min-height: 100vh; */
 }
 
+main {
+  margin-top: 70px;
+  text-align: center;
+}
+
 .main-heading {
     background: url("../images/dam_sample3.jpg") no-repeat center;
     height: 300px;
-    margin-top: 70px;
     text-align: center;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
@@ -55,7 +59,7 @@ nav .navbar-brand #logo {
 }
 
 .navbarNav .navbar-nav .nav-item .nav-link {
-   margin: 0px 3px 5px 3px;
+    margin: 0px 3px 5px 3px;
 }
 
 .navbarNav .navbar-nav .nav-item .btn {
@@ -75,10 +79,9 @@ nav .navbar-brand #logo {
 
 .dams-container {
     height: 250px;
-    margin-top: 70px;
+    /* margin-top: 70px; */
     text-align: center;
     background: url("../images/dam_sample3.jpg") no-repeat center;
-    margin-top: 70px;
     padding-top: 40px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: whitesmoke;
@@ -93,55 +96,81 @@ nav .navbar-brand #logo {
 .dam_info table {
     width: 100%; /* Make the table fill the available width */
     border-collapse: collapse; /* Remove borders between table cells */
-  }
+}
   
-  .dam_info th, .dam_info td {
+.dam_info th, .dam_info td {
     padding: 10px; /* Add padding for better readability */
     text-align: left; /* Align content to the left */
     border: 1px solid #ddd; /* Add a thin border to each cell */
-  }
+}
   
-  .dam_info th {
+.dam_info th {
     background-color: #f2f2f2; /* Light gray background for headers */
     font-weight: bold; /* Make headers bolder */
-  }
+}
   
-  .dam_info tr:nth-child(even) {
+.dam_info tr:nth-child(even) {
     background-color: #f9f9f9; /* Alternate row colors for better visual separation */
-  }
+}
 
-  .dam_background {
+.dam_background {
     padding: 20px;
     background-color: rgb(238, 235, 236);
-  }
+}
   
-  .graph1, .graph2, .graph3 {
+.graph1, .graph2, .graph3 {
     height: 150px;
     background-color: aqua;
     margin: 10px;
     text-align: center;
     color: whitesmoke;
     text-shadow: 2px 2px 4px #000;
-  }
+}
 
-  .graphs_container h2 {
+.graphs_container h2 {
     line-height: 150px;
-  }
+}
 
-  .dam_data_container {
-    margin-top: 70px;
-  }
-
-  .dam_data_container .btn {
+.dam_data_container .btn {
     float: right;
-  }
+}
 
-  .dam_percentage_container {
+.dam_percentage_container {
     margin-top: 20px;
     padding: 2rem;
-  }
+}
 
-  .dam_percentage_container .card-body {
+.dam_percentage_container .card-body {
     background-color: #e0ffff;  /* Light blue color */
     border-radius: 5px;
-  }
+}
+
+.admin-dashboard_title {
+    margin-top: 100px;
+}
+
+.admin-dashboard_subtitle {
+    margin-top: 30px;
+}
+
+.admin-dashboard_select {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.login-title {
+  margin-top: 100px;
+}
+
+.form-container {
+  margin-top: 30px;
+}
+
+.form-container div {
+    display: block;
+    margin: 20px 0 0 0;
+}
+
+.form-container .btn {
+  margin: 0 50px 0 0;
+}

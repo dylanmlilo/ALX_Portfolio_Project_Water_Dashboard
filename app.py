@@ -4,11 +4,12 @@ from models.engine.database import results_to_dict_list, dams_dicts, session
 from models.dams import Base, Dams, DamData, engine
 from models.users import Users
 from models.login import LoginForm
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 app = Flask(__name__)
 app.secret_key = 'Sherry123#'
+app.config['LOGIN_DURATION'] = timedelta(minutes=1)
 
 
 login_manager = LoginManager()
@@ -83,7 +84,7 @@ def login():
         user = session.query(Users).filter_by(username=form.username.data).first()
         if user and user.password == form.password.data:
             login_user(user)
-            return redirect(url_for('dam_data'))
+            return redirect(url_for('admin_dashboard'))
         else:
             return "Invalid username or password"
     return render_template('login.html', form=form)
@@ -137,6 +138,11 @@ def insert_dam_data():
         except Exception as e:
             session.rollback()
             return jsonify({'error': str(e)}), 400
+        
+@app.route("/admin_dashboard", strict_slashes=False)
+@login_required
+def admin_dashboard():
+    return render_template("admin_dashboard.html")
         
 
 

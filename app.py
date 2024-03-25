@@ -9,7 +9,6 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 app.secret_key = 'Sherry123#'
-app.config['LOGIN_DURATION'] = timedelta(minutes=1)
 
 
 login_manager = LoginManager()
@@ -35,7 +34,7 @@ def index():
     # Create a dictionary with unique dam names as keys and empty lists as values
     dam_data_by_dam_name = {dam_name: [] for dam_name in unique_dam_names}
 
-    # Loop through data again to populate the dictionary (optional)
+    # Loop through data again to populate the dictionary
     for row in dams:
         dam_data_by_dam_name[row['dam_name']].append(row)  # Append data to the list
 
@@ -63,7 +62,7 @@ def dam(dam_id):
     # Get today's date
     today_date = datetime.today()
 
-# Format the date string
+    # Format the date string
     formatted_date = today_date.strftime('%d-%B-%Y')
 
     # Get percentages for today's reading (assuming date is a field in DamData)
@@ -71,9 +70,6 @@ def dam(dam_id):
                              .join(DamData, Dams.id == DamData.dam_id) \
                              .filter(DamData.date == today_date) \
                              .all()
-                
-
-  # ... your existing template rendering logic ...
 
     return render_template('dam_page.html', dam=dam, dam_data=dam_data, dam_percentage=dam_percentage, today_date=formatted_date)
 
@@ -138,6 +134,43 @@ def insert_dam_data():
         except Exception as e:
             session.rollback()
             return jsonify({'error': str(e)}), 400
+        
+@app.route('/delete_dam_data/<int:dam_data_id>', methods=['GET', 'POST'])
+@login_required
+def delete_dam_data(dam_data_id):
+    dam_data = session.query(DamData).filter_by(id=dam_data_id).first()
+    if dam_data:
+        session.delete(dam_data)
+        session.commit()
+        return redirect(url_for('dam_data'))
+    else:
+        return jsonify({'error': 'Data not found'}), 404
+        
+        
+@app.route('/update_dam_data/<int:dam_data_id>', methods=['POST'])
+@login_required
+def update_dam_data(dam_data_id):
+    if request.method == 'POST':
+        try:
+            dam_data = session.query(DamData).filter_by(id=dam_data_id).first()
+            if dam_data:
+                dam_data.dam_id = request.form.get('dam_id')
+                dam_data.date = request.form.get('date')
+                dam_data.dam_reading = request.form.get('dam_reading')
+                dam_data.dam_percentage = request.form.get('dam_percentage')
+                dam_data.dam_volume = request.form.get('dam_volume')
+                dam_data.daily_inflow = request.form.get('daily_inflow')
+                
+                session.commit()
+                flash('Data updated successfully')
+                return redirect(url_for('dam_data'))
+            else:
+                return jsonify({'error': 'Dam data not found'}), 404
+
+        except Exception as e:
+            session.rollback()
+            return jsonify({'error': str(e)}), 400
+
         
 @app.route("/admin_dashboard", strict_slashes=False)
 @login_required

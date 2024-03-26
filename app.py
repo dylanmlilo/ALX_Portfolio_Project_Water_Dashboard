@@ -5,6 +5,11 @@ from models.dams import Base, Dams, DamData, engine
 from models.users import Users
 from models.login import LoginForm
 from datetime import datetime, timedelta
+from dash import Dash, html, dcc, callback, Input, Output, dash_table
+import pandas as pd
+import json
+import plotly
+import plotly_express as px
 
 
 app = Flask(__name__)
@@ -25,20 +30,40 @@ def load_user(user_id):
 def test_page():
     return render_template('test_page.html')
 
+@app.route('/graph', strict_slashes=False)
+def graph():
+    dams_data = session.query(Dams, DamData).join(DamData, Dams.id == DamData.dam_id).all()
+    dam_data = results_to_dict_list(dams_data)
+    df = pd.DataFrame(dam_data)
+    fig1 = px.line(df, x = 'date', y = 'dam_reading', color='dam_name', title = "Date vs Dam Reading")
+    
+    graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    return render_template("graph.html", graph1JSON=graph1JSON)
+
+
 @app.route('/', strict_slashes=False)
 def index():
     dams_data = session.query(Dams, DamData).join(DamData, Dams.id == DamData.dam_id).all()
-    dams = results_to_dict_list(dams_data)
-    unique_dam_names = set(row['dam_name'] for row in dams)
+    dam_data = results_to_dict_list(dams_data)
+    df = pd.DataFrame(dam_data)
+    fig1 = px.area(df, x = 'date', y = 'dam_reading', color='dam_name', title = "Date vs Dam Reading")
+    
+    graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+    
+    return render_template("home.html", graph1JSON=graph1JSON)
+    # dams_data = session.query(Dams, DamData).join(DamData, Dams.id == DamData.dam_id).all()
+    # dams = results_to_dict_list(dams_data)
+    # unique_dam_names = set(row['dam_name'] for row in dams)
 
-    # Create a dictionary with unique dam names as keys and empty lists as values
-    dam_data_by_dam_name = {dam_name: [] for dam_name in unique_dam_names}
+    # # Create a dictionary with unique dam names as keys and empty lists as values
+    # dam_data_by_dam_name = {dam_name: [] for dam_name in unique_dam_names}
 
-    # Loop through data again to populate the dictionary
-    for row in dams:
-        dam_data_by_dam_name[row['dam_name']].append(row)  # Append data to the list
+    # # Loop through data again to populate the dictionary
+    # for row in dams:
+    #     dam_data_by_dam_name[row['dam_name']].append(row)  # Append data to the list
 
-    return render_template('home.html', dams=dam_data_by_dam_name)
+    # return render_template('home.html', dams=dam_data_by_dam_name)
 
 
 
@@ -160,6 +185,18 @@ def update_dam_data(dam_data_id):
                 dam_data.dam_percentage = request.form.get('dam_percentage')
                 dam_data.dam_volume = request.form.get('dam_volume')
                 dam_data.daily_inflow = request.form.get('daily_inflow')
+                
+                if not daily_inflow:
+                    daily_inflow = None
+                else:
+                    try:
+                        daily_inflow = float(daily_inflow)
+                    except ValueError:
+                        errors.append("daily_inflows must be a valid number")
+
+            if errors:
+                return jsonify({'errors': errors}), 400
+
                 
                 session.commit()
                 flash('Data updated successfully')

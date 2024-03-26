@@ -6,11 +6,14 @@
     <h1>City of Bulawayo Water Dashboard</h1>
     <h2>Water Supply and Distribution Statistics</h2>
   </div>
-  <div class="main_graph">
-    {% include 'dam_data_home.html' %}
+  <div id="graph-container1" class="graph-container">
+
   </div>
-  <div class="additional-content">
-    <p>Here's some additional information about the water dashboard...</p>
-  </div>
+       <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+       <script>
+          var graph1 = {{ graph1JSON|safe}}
+          Plotly.plot('graph-container1', graph1, {responsive: true});
+       </script>
+
 </div>
 {% endblock %}

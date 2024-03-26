@@ -2,6 +2,8 @@ body {
     margin: 0 0 80px 0!important;
     padding: 0;
     box-sizing: border-box;
+    min-height: 100vh; /* Set minimum height for content area */
+    /* padding-bottom: footer-height; */
     /* display: flex; */
     /* min-height: 100vh; */
 }
@@ -41,7 +43,12 @@ main {
     bottom: 0;
     width: 100%;
     background: rgba(5, 59, 141, 0.767);
-}
+  }
+  
+  .content {
+    min-height: 100vh;
+    padding-bottom: 50px; /* Adjust this value to match the height of the footer */
+  }
 
 .footer a, .footer p {
     color: whitesmoke!important;
@@ -189,4 +196,10 @@ nav .navbar-brand #logo {
 
 .left-aligned-text {
   text-align: left;
+}
+
+.graph-container {
+    width: 1300px;
+    height: 500px;
+    margin: 20px auto;
 }

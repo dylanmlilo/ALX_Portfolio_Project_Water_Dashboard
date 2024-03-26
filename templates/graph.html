@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>Gapminder Data Visualization</h1>
+
+<div id="graph-container">  
+
+</div>
+     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+     <script>
+        var graph1 = {{ graph1JSON|safe}}
+        Plotly.plot('graph-container', graph1, {responsive: true});
+     </script>
+{% endblock %}

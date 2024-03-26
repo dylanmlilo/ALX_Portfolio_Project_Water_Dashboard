@@ -1,5 +1,6 @@
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy import create_engine
+import pandas as pd
 
 
 db_connection_string = "mysql+pymysql://root:Sherry123#@127.0.0.1/bcc_water_data?charset=utf8mb4"
@@ -11,6 +12,7 @@ Base = declarative_base()
 Session = sessionmaker(bind=engine)
 
 session = Session()
+
 
 def results_to_dict_list(results):
     """
@@ -46,6 +48,8 @@ def dams_dicts(dams):
 
 # dams_to_dicts = dams_dicts(dams)
 # dam_data_to_dict = results_to_dict_list(dams_data)
+# df = pd.DataFrame(dam_data_to_dict)
+# print(df)
 
 # print(dams_to_dicts)
 # print("----------")

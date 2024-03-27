@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Date, PrimaryKeyConstraint, DECIMAL
-from models.engine.database import Base, engine, session
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()
 
 
 class Dams(Base):

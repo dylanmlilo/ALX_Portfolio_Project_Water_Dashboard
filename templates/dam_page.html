@@ -12,23 +12,33 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Today's Dam Percentage</h5>
-                    <p class="card-text">{{ dam_percentage }}%</p>
-                    <p class="card-text">{{ today_date }}</p>
+                    <h3 class="card-title">Today's Dam Percentage</h3>
+                    <p class="card-text dam_percentage {% if current_dam_percentage < critical_dam_percentage %}dam_low{% endif %}">{{ current_dam_percentage }}%</p>
+                    <p class="card-text date">{{ today_date }}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="graphs_container">
-    <div class="graph1">
-        <h2>Graph1 container</h2>
+    <div id="graph1" class="graph-container" data-aos="fade-left">
     </div>
-    <div class="graph2">
-        <h2>Graph2 container</h2>
+    <div id="graph2" class="graph-container" data-aos="fade-left">
     </div>
-    <div class="graph3">
-        <h2>Graph3 container</h2>
+    <div id="graph3" class="graph-container" data-aos="slide-up">
     </div>
 </div>
+<div class="testt">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt quod delectus impedit nesciunt ullam a blanditiis doloremque nemo error. Velit ipsum molestias, officiis magni sit quam laborum vitae ducimus ratione unde accusantium fuga fugiat? Neque aliquam ex numquam placeat unde, sapiente molestiae illo eveniet blanditiis rerum quas earum eligendi quia mollitia explicabo illum quam? Facere, corporis quos qui quisquam deserunt officiis aliquam commodi harum doloribus, facilis dicta laborum atque minima ex tenetur voluptatibus similique maiores labore? Dolorem excepturi aliquam cupiditate corporis labore recusandae delectus quis. Velit vero tenetur voluptatem autem earum! Fugiat vitae praesentium blanditiis, iure repellat in ullam quas.</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam provident repudiandae debitis corporis, adipisci quasi mollitia quam necessitatibus explicabo nostrum ad officia at soluta ipsam vero nemo eum cupiditate veniam esse dolore ab voluptatum minima fuga. Delectus inventore fuga doloremque officia nisi dicta non deleniti ad, commodi culpa quas saepe asperiores beatae perspiciatis aspernatur omnis! Ea nemo, suscipit dolores deserunt harum totam. Quos necessitatibus, quia illo numquam iusto natus saepe molestias ex perferendis quidem tenetur a? Rem similique ex illum culpa accusantium molestias quidem consectetur debitis, dolores pariatur perspiciatis incidunt voluptatibus iure, adipisci amet, magnam fugit temporibus laudantium ipsa minima.</p>
+  </div>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+   var dam_graph1 = {{ dam_graph1JSON|safe}}
+   Plotly.plot('graph1', dam_graph1, {responsive: true});
+   var dam_graph2 = {{ dam_graph2JSON|safe}}
+   Plotly.plot('graph2', dam_graph2, {responsive: true});
+   var dam_graph3 = {{ dam_graph3JSON|safe}}
+   Plotly.plot('graph3', dam_graph3, {responsive: true});
+</script>
 {% endblock%}

@@ -1,8 +1,10 @@
 body {
-    margin: 0 0 80px 0!important;
+    margin: 0!important;
     padding: 0;
     box-sizing: border-box;
-    min-height: 100vh; /* Set minimum height for content area */
+    position: relative;
+    min-height: 100%;
+    /* Set minimum height for content area */
     /* padding-bottom: footer-height; */
     /* display: flex; */
     /* min-height: 100vh; */
@@ -10,7 +12,9 @@ body {
 
 main {
   margin-top: 70px;
+  margin-bottom: 0px;
   text-align: center;
+  min-height: 100vh;
 }
 
 .main-heading {
@@ -39,7 +43,7 @@ main {
 }
 
 .footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
     background: rgba(5, 59, 141, 0.767);
@@ -52,6 +56,11 @@ main {
 
 .footer a, .footer p {
     color: whitesmoke!important;
+}
+
+.footer .vision {
+    font-size: x-large;
+    text-shadow: 1px 1px 4px #000;
 }
 
 .navbar {
@@ -99,6 +108,20 @@ nav .navbar-brand #logo {
     font-size: 60px;
 }
 
+.dam_percentage_container .dam_percentage {
+    text-shadow: 1px 1px 2px #000;
+    font-size: xx-large;
+    color: #0d91b3;
+  }
+  
+  .dam_percentage_container .dam_percentage.dam_low {
+    color: red;
+  }
+
+.date {
+    font-size: x-large;
+}
+
 /* Styles for the dam information table */
 .dam_info table {
     width: 100%; /* Make the table fill the available width */
@@ -126,17 +149,12 @@ nav .navbar-brand #logo {
 }
   
 .graph1, .graph2, .graph3 {
-    height: 150px;
-    background-color: aqua;
     margin: 10px;
-    text-align: center;
+    /* text-align: center;
     color: whitesmoke;
-    text-shadow: 2px 2px 4px #000;
+    text-shadow: 2px 2px 4px #000; */
 }
 
-.graphs_container h2 {
-    line-height: 150px;
-}
 
 .dam_data_container .btn {
     float: right;

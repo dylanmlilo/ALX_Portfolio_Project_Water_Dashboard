@@ -1,10 +1,10 @@
 {% block content %}
-<!-- Update Modal -->
-<div class="modal fade" id="updateModal{{ dam_data.id }}" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+<!-- Update Dam Modal -->
+<div class="modal fade" id="updateDamModal{{ dam_data.id }}" tabindex="-1" role="dialog" aria-labelledby="updateDamModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="updateModalLabel">Edit Form</h5>
+          <h5 class="modal-title" id="updateDamModalLabel">Edit Form</h5>
         </div>
         <div class="modal-body">
           <form action="{{ url_for('update_dam_data', dam_data_id=dam_data.id) }}" method="post">

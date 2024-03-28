@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="dams-container">
-    <h1>{{ dam['dam_name'] }}</h1>
+    <h1>{{ reservoir['reservoir_name'] }}</h1>
 </div>
 <div class="dam_background">
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu leo purus. Maecenas euismod semper magna nec blandit. In hac habitasse platea dictumst. Vivamus vestibulum est laoreet sapien scelerisque interdum. Donec placerat quam in pulvinar hendrerit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
@@ -12,8 +12,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title">Today's Dam Percentage</h3>
-                    <p class="card-text dam_percentage {% if current_dam_percentage < critical_dam_percentage %}unit_low{% endif %}">{{ current_dam_percentage }}%</p>
+                    <h3 class="card-title">Today's Reservoir Level</h3>
+                    <p class="card-text dam_percentage {% if current_reservoir_level < critical_reservoir_level %}unit_low{% endif %}">{{ current_reservoir_level }}</p>
                     <p class="card-text date">{{ today_date }}</p>
                 </div>
             </div>
@@ -21,11 +21,9 @@
     </div>
 </div>
 <div class="graphs_container">
-    <div id="graph1" class="graph-container" data-aos="fade-left">
+    <div id="res_graph1" class="graph-container" data-aos="fade-left">
     </div>
-    <div id="graph2" class="graph-container" data-aos="fade-left">
-    </div>
-    <div id="graph3" class="graph-container" data-aos="slide-up">
+    <div id="res_graph2" class="graph-container" data-aos="fade-left">
     </div>
 </div>
 <div class="testt">
@@ -34,11 +32,9 @@
   </div>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
-   var dam_graph1 = {{ dam_graph1JSON|safe}}
-   Plotly.plot('graph1', dam_graph1, {responsive: true});
-   var dam_graph2 = {{ dam_graph2JSON|safe}}
-   Plotly.plot('graph2', dam_graph2, {responsive: true});
-   var dam_graph3 = {{ dam_graph3JSON|safe}}
-   Plotly.plot('graph3', dam_graph3, {responsive: true});
+   var res_graph1 = {{ level_graphJSON|safe}}
+   Plotly.plot('res_graph1', res_graph1, {responsive: true});
+   var res_graph2 = {{ volume_graphJSON|safe}}
+   Plotly.plot('res_graph2', res_graph2, {responsive: true});
 </script>
 {% endblock%}

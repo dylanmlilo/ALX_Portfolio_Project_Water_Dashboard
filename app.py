@@ -1,9 +1,10 @@
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for, flash
 from flask_login import LoginManager, login_required, UserMixin, login_user, logout_user, current_user
-from models.engine.database import dams_data_to_dict_list, dams_dicts, session
+from models.engine.database import dams_data_to_dict_list, reservoir_data_to_dict_list, session
 from models.users import Users
 from models.login import LoginForm
 from models.dams import Dams, DamData
+from models.reservoirs import Reservoirs, ReservoirData
 from datetime import datetime, timedelta
 from dash import Dash, html, dcc, callback, Input, Output, dash_table
 import pandas as pd
@@ -51,11 +52,35 @@ def index():
     
     return render_template("home.html", graph1JSON=graph1JSON)
 
+
+@app.route('/login', strict_slashes=False, methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = session.query(Users).filter_by(username=form.username.data).first()
+        if user and user.password == form.password.data:
+            login_user(user)
+            return redirect(url_for('admin_dashboard'))
+        else:
+            return "Invalid username or password"
+    return render_template('login.html', form=form)
+
+@app.route('/logout', strict_slashes=False)
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+@app.route("/admin_dashboard", strict_slashes=False)
+@login_required
+def admin_dashboard():
+    return render_template("admin_dashboard.html")
+        
+
 @app.route('/dams', strict_slashes=False)
 def dams():
     return render_template('dams_page.html')
 
-@app.route('/<string:dam_name>', strict_slashes=False)
+@app.route('/dams/<string:dam_name>', strict_slashes=False)
 def dam(dam_name):
     """
     Route to display dam details and data.
@@ -113,32 +138,14 @@ def dam(dam_name):
                            today_date=formatted_date, critical_dam_percentage=critical_dam_percentage, 
                            current_dam_percentage=current_dam_percentage, dam_graph1JSON=dam_graph1JSON, 
                            dam_graph2JSON=dam_graph2JSON, dam_graph3JSON=dam_graph3JSON)
-
-
-@app.route('/login', strict_slashes=False, methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = session.query(Users).filter_by(username=form.username.data).first()
-        if user and user.password == form.password.data:
-            login_user(user)
-            return redirect(url_for('admin_dashboard'))
-        else:
-            return "Invalid username or password"
-    return render_template('login.html', form=form)
-
-@app.route('/logout', strict_slashes=False)
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
-
-        
+    
 
 @app.route('/dam_data', strict_slashes=False, methods=['GET', 'POST'])
 @login_required
 def dam_data():
     dam_data = dams_data_to_dict_list()
     return render_template('dam_data.html', dam_data_list=dam_data)
+
 
 @app.route('/insert_dam_data', methods=['POST'])
 def insert_dam_data():
@@ -203,7 +210,6 @@ def update_dam_data(dam_data_id):
                 
                 errors = []
                 
-
                 if daily_inflow is None or daily_inflow == '':
                     daily_inflow = None
                 else:
@@ -225,14 +231,70 @@ def update_dam_data(dam_data_id):
         except Exception as e:
             session.rollback()
             return jsonify({'error': str(e)}), 400
-
         
-@app.route("/admin_dashboard", strict_slashes=False)
+@app.route('/reservoirs/<string:reservoir_name>', strict_slashes=False)
+def reservoir(reservoir_name):
+    """
+    Route to display reservoir details and data.
+
+    Args:
+        reservoir_name (str): Name of the reservoir to retrieve data for.
+
+    Returns:
+        template: Rendered reservoir_page.html template with reservoir details and data.
+        404: If the specified reservoir is not found.
+    """
+
+    reservoir = session.query(Reservoirs).filter(Reservoirs.reservoir_name == reservoir_name).first()
+
+    if reservoir is None:
+        abort(404)  # Reservoir not found
+
+    # Get reservoir data using reservoir.id
+    reservoir_data = reservoir_data_to_dict_list(reservoir_id=reservoir.id)
+    df = pd.DataFrame(reservoir_data)
+
+    # Get critical reservoir percentage from the database
+    critical_reservoir_level = reservoir.critical_level  # Assuming it's stored in the database
+
+    # Generate graphs for levels, percentages, and volumes
+    level_fig = px.area(df, x='date', y='reservoir_level', title=f"{reservoir.reservoir_name} Levels")
+    level_fig.add_hline(y=critical_reservoir_level, line_dash="dot", line_color="red", annotation_text="Critical Level")
+    level_graphJSON = json.dumps(level_fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+    volume_fig = px.area(df, x='date', y='reservoir_volume', title=f"{reservoir.reservoir_name} Volumes")
+    volume_graphJSON = json.dumps(volume_fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+
+    current_reservoir_level = (
+        session.query(ReservoirData.reservoir_level)
+        .join(Reservoirs, Reservoirs.id == ReservoirData.reservoir_id)
+        .filter(Reservoirs.reservoir_name == reservoir_name)
+        .order_by(ReservoirData.date.desc())
+        .first()
+    )
+    current_reservoir_level = current_reservoir_level[0] if current_reservoir_level else None
+
+    today_date = datetime.today().strftime('%d-%B-%Y')
+
+    return render_template(
+        'reservoir_page.html',
+        reservoir=reservoir,
+        reservoir_data=reservoir_data,
+        today_date=today_date,
+        critical_reservoir_level=critical_reservoir_level,
+        current_reservoir_level=current_reservoir_level,
+        level_graphJSON=level_graphJSON,
+        volume_graphJSON=volume_graphJSON
+    )
+    
+    
+@app.route('/reservoir_data', strict_slashes=False, methods=['GET', 'POST'])
 @login_required
-def admin_dashboard():
-    return render_template("admin_dashboard.html")
-        
+def reservoir_data():
+    reservoir_data = reservoir_data_to_dict_list()
+    return render_template('reservoir_data.html', reservoir_data_list=reservoir_data)
 
-
+                
 if __name__ == '__main__':
     app.run(debug=True, port=3000)

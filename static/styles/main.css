@@ -93,7 +93,7 @@ nav .navbar-brand #logo {
     background-color: rgb(206, 188, 194);
 }
 
-.dams-container {
+.stats-container {
     height: 250px;
     /* margin-top: 70px; */
     text-align: center;
@@ -104,17 +104,17 @@ nav .navbar-brand #logo {
     text-shadow: 4px 4px 16px #000
 }
 
-.dams-container h1 {
+.stats-container h1 {
     font-size: 60px;
 }
 
-.dam_percentage_container .dam_percentage {
+.stats_percentage_container .stats_percentage {
     text-shadow: 1px 1px 2px #000;
     font-size: xx-large;
     color: #0d91b3;
   }
   
-  .dam_percentage_container .dam_percentage.unit_low {
+.stats_percentage_container .stats_percentage.unit_low {
     color: red;
   }
 
@@ -122,30 +122,10 @@ nav .navbar-brand #logo {
     font-size: x-large;
 }
 
-/* Styles for the dam information table */
-.dam_info table {
-    width: 100%; /* Make the table fill the available width */
-    border-collapse: collapse; /* Remove borders between table cells */
-}
-  
-.dam_info th, .dam_info td {
-    padding: 10px; /* Add padding for better readability */
-    text-align: left; /* Align content to the left */
-    border: 1px solid #ddd; /* Add a thin border to each cell */
-}
-  
-.dam_info th {
-    background-color: #f2f2f2; /* Light gray background for headers */
-    font-weight: bold; /* Make headers bolder */
-}
-  
-.dam_info tr:nth-child(even) {
-    background-color: #f9f9f9; /* Alternate row colors for better visual separation */
-}
 
-.dam_background {
+.stats_background {
     padding: 20px;
-    background-color: rgb(238, 235, 236);
+    background-color: lightgray
 }
   
 .graph1, .graph2, .graph3 {
@@ -155,17 +135,22 @@ nav .navbar-brand #logo {
     text-shadow: 2px 2px 4px #000; */
 }
 
+.stats_data_container {
+    background: rgba(219, 223, 223, 0.767);
+    width: 1000px;
+    margin-top: 100px;
+}
 
-.dam_data_container .btn {
+.stats_data_container .btn {
     float: right;
 }
 
-.dam_percentage_container {
+.stats_percentage_container {
     margin-top: 20px;
     padding: 2rem;
 }
 
-.dam_percentage_container .card-body {
+.stats_percentage_container .card-body {
     background-color: #e0ffff;  /* Light blue color */
     border-radius: 5px;
 }
@@ -220,4 +205,18 @@ nav .navbar-brand #logo {
     width: 1300px;
     height: 500px;
     margin: 20px auto;
+}
+
+.logadmin_container {
+    background: rgba(47, 182, 182, 0.767);
+    width: 1000px;
+    height: 325px;
+    margin: 0 auto;
+    border-radius: 20px;
+    color: whitesmoke;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.logadmin_container h1 {
+    padding-top: 25px;
 }

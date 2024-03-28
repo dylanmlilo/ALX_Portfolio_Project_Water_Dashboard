@@ -3,10 +3,11 @@
 {% block content %}
 <div class="main_container">
   <div class="main-heading">
-    <h1>City of Bulawayo Water Dashboard</h1>
-    <h2>Water Supply and Distribution Statistics</h2>
+    <h1>City of Bulawayo Water Department</h1>
+    <h2>Water Supply and Distribution Statistics Dashboard</h2>
   </div>
   <div id="graph-container1" class="graph-container"></div>
+  <div id="graph-container2" class="graph-container"></div>
   <div class="testt">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt quod delectus impedit nesciunt ullam a blanditiis doloremque nemo error. Velit ipsum molestias, officiis magni sit quam laborum vitae ducimus ratione unde accusantium fuga fugiat? Neque aliquam ex numquam placeat unde, sapiente molestiae illo eveniet blanditiis rerum quas earum eligendi quia mollitia explicabo illum quam? Facere, corporis quos qui quisquam deserunt officiis aliquam commodi harum doloribus, facilis dicta laborum atque minima ex tenetur voluptatibus similique maiores labore? Dolorem excepturi aliquam cupiditate corporis labore recusandae delectus quis. Velit vero tenetur voluptatem autem earum! Fugiat vitae praesentium blanditiis, iure repellat in ullam quas.</p>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam provident repudiandae debitis corporis, adipisci quasi mollitia quam necessitatibus explicabo nostrum ad officia at soluta ipsam vero nemo eum cupiditate veniam esse dolore ab voluptatum minima fuga. Delectus inventore fuga doloremque officia nisi dicta non deleniti ad, commodi culpa quas saepe asperiores beatae perspiciatis aspernatur omnis! Ea nemo, suscipit dolores deserunt harum totam. Quos necessitatibus, quia illo numquam iusto natus saepe molestias ex perferendis quidem tenetur a? Rem similique ex illum culpa accusantium molestias quidem consectetur debitis, dolores pariatur perspiciatis incidunt voluptatibus iure, adipisci amet, magnam fugit temporibus laudantium ipsa minima.</p>
@@ -16,5 +17,7 @@
 <script>
   var graph1 = {{ graph1JSON|safe}}
   Plotly.plot('graph-container1', graph1, {responsive: true});
+  var graph2 = {{ graph2JSON|safe}}
+  Plotly.plot('graph-container2', graph2, {responsive: true});
 </script>
 {% endblock %}

@@ -46,11 +46,16 @@ def graph():
 def index():
     dam_data = dams_data_to_dict_list()
     df = pd.DataFrame(dam_data)
-    fig1 = px.area(df, x = 'date', y = 'dam_reading', color='dam_name', title = "Date vs Dam Reading")
+    fig1 = px.area(df, x = 'date', y = 'dam_reading', color='dam_name', title = "Dam Readings")
+    
+    reservoir_data = reservoir_data_to_dict_list()
+    df = pd.DataFrame(reservoir_data)
+    fig2 = px.area(df, x = 'date', y = 'reservoir_level', color='reservoir_name', title = "Reservoir Levels")
     
     graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+    graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
     
-    return render_template("home.html", graph1JSON=graph1JSON)
+    return render_template("home.html", graph1JSON=graph1JSON, graph2JSON=graph2JSON)
 
 
 @app.route('/login', strict_slashes=False, methods=['GET', 'POST'])

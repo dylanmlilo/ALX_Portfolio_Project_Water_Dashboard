@@ -2,15 +2,18 @@
 
 {% block content %}
 
-<div class="container dam_data_container">
+<div class="container stats_data_container">
     <div class="row">
         <div class="col md-12">
-            <div class="jumbotron data_container p-3">
-                <h2 class="left-aligned-text"> Reservoirs Data <button type="button" class="btn btn-success float-right"
+            <div class="jumbotron stats_container p-3">
+                <h2 class="left-aligned-text"> Reservoirs Data 
+                    <a href="/admin_dashboard" class="btn btn-secondary float-right"
+                    style="margin-left: 3px;">Back</a>
+                    <button type="button" class="btn btn-success float-right"
                     data-toggle="modal" data-target="#myReservoirModal"> Add New Data </button>
                 </h2>
 
-                <table class="table table-hover table-dark">
+                <table class="table table-hover">
 
                     <tr>
                         <th>ID</th>
@@ -25,19 +28,19 @@
                     </div>
 
                     {% for reservoir_data in reservoir_data_list %}
-                    <tr>
+                    <tr class="{% if loop.index % 2 == 0 %}table-active{% else %}{% endif %}">
                         <td> {{ reservoir_data.id }} </td>
-                        <td> {{ reservoir.reservoir_name }} </td>
+                        <td> {{ reservoir_data.reservoir_name }} </td>
                         <td> {{ reservoir_data.date }} </td>
-                        <td> {{ reservoir.reservoir_level }} </td>
-                        <td> {{ reservoir.dam_percentage }}</td>
-                        <td> {{ reservoir.dam_volume }} </td>
+                        <td> {{ reservoir_data.reservoir_level }} </td>
+                        <td> {{ reservoir_data.reservoir_percentage }}</td>
+                        <td> {{ reservoir_data.reservoir_volume }} </td>
 
                         <td> 
-                            <a href="/delete_reservoir_data/{{ reservoir.id }}" class="btn btn-danger btn-xs"
+                            <a href="/delete_reservoir_data/{{ reservoir_data.id }}" class="btn btn-danger btn-xs"
                             onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
-                            <a href="/update_reservoir_data/{{ reservoir.id }}" class="btn btn-warning btn-xs" style="margin-right: 5px;"
-                            data-toggle="modal" data-target="#updateReservoirModal{{ reservoir.id }}">Edit</a>
+                            <a href="/update_reservoir_data/{{ reservoir_data.id }}" class="btn btn-warning btn-xs" style="margin-right: 5px;"
+                            data-toggle="modal" data-target="#updateReservoirModal{{ reservoir_data.id }}">Edit</a>
                             
                         </td>
                     </tr>
@@ -47,6 +50,8 @@
                     {% endfor %}
 
                 </table>
+                <a href="/admin_dashboard" class="btn btn-secondary float-right"
+                    style="margin-left: 3px;">Back</a>
             </div>
         </div>
     </div>

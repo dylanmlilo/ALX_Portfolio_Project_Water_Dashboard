@@ -11,6 +11,7 @@ import pandas as pd
 import json
 import plotly
 import plotly_express as px
+import plotly.graph_objects as go
 
 
 app = Flask(__name__)
@@ -46,11 +47,13 @@ def graph():
 def index():
     dam_data = dams_data_to_dict_list()
     df = pd.DataFrame(dam_data)
-    fig1 = px.area(df, x = 'date', y = 'dam_reading', color='dam_name', title = "Dam Readings")
+    fig1 = px.area(df, x = 'date', y = 'dam_reading', color='dam_name',
+                   labels={'x' : 'Date', 'y' : ' Dam Reading'}, title = "Dam Readings")
     
     reservoir_data = reservoir_data_to_dict_list()
     df = pd.DataFrame(reservoir_data)
-    fig2 = px.area(df, x = 'date', y = 'reservoir_level', color='reservoir_name', title = "Reservoir Levels")
+    fig2 = px.area(df, x = 'date', y = 'reservoir_level', color='reservoir_name',
+                   labels={'x' : 'Date', 'y' : ' Reservoir Level'}, title = "Reservoir Levels")
     
     graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
     graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
@@ -108,37 +111,37 @@ def dam(dam_name):
     df = pd.DataFrame(dam_data)
     # Get the real value from the database
     critical_dam_percentage = 40
-    dam_fig1 = px.area(df, x = 'date', y = 'dam_percentage', 
-                   title = f"{dam.dam_name} Percentages")
+    dam_fig1 = px.area(df, x = 'date', y = 'dam_percentage',
+                       labels={'x' : 'Date', 'y' : ' Dam Percentage'}, 
+                       title = f"{dam.dam_name} Percentages")
     # Add a horizontal line for the critical_dam_percentage
     dam_fig1.add_hline(y=critical_dam_percentage, line_dash="dot",
                    line_color="red", annotation_text="Critical Dam Percentage")
     dam_graph1JSON = json.dumps(dam_fig1, cls=plotly.utils.PlotlyJSONEncoder)
     
-    dam_fig2 = px.area(df, x = 'date', y = 'dam_reading', 
-                   title = f"{dam.dam_name} Readings")
+    dam_fig2 = px.area(df, x = 'date', y = 'dam_reading',
+                       labels={'x' : 'Date', 'y' : ' Dam Reading'},
+                       title = f"{dam.dam_name} Readings")
     dam_graph2JSON = json.dumps(dam_fig2, cls=plotly.utils.PlotlyJSONEncoder)
     
-    dam_fig3 = px.area(df, x = 'date', y = 'dam_volume', 
-                   title = f"{dam.dam_name} Volumes")
+    dam_fig3 = px.area(df, x = 'date', y = 'dam_volume',
+                       labels={'x' : 'Date', 'y' : ' Dam Volume'}, 
+                       title = f"{dam.dam_name} Volumes")
     dam_graph3JSON = json.dumps(dam_fig3, cls=plotly.utils.PlotlyJSONEncoder)
     
     today_date = datetime.today()
 
     formatted_date = today_date.strftime('%d-%B-%Y')
     
-    # Get the last dam percentage (assuming date is a field in DamData)
     current_dam_percentage = session.query(DamData.dam_percentage) \
                                  .join(Dams, Dams.id == DamData.dam_id) \
                                  .filter(Dams.dam_name == dam_name) \
                                  .order_by(DamData.date.desc()) \
                                  .first()
 
-    # Check if current_dam_percentage is not None (no data for the dam)
     if current_dam_percentage is not None:
-        current_dam_percentage = current_dam_percentage[0]  # Extract the value
+        current_dam_percentage = current_dam_percentage[0] 
     
-
     return render_template('dam_page.html', dam=dam, dam_data=dam_data, 
                            today_date=formatted_date, critical_dam_percentage=critical_dam_percentage, 
                            current_dam_percentage=current_dam_percentage, dam_graph1JSON=dam_graph1JSON, 
@@ -263,11 +266,15 @@ def reservoir(reservoir_name):
     critical_reservoir_level = reservoir.critical_level  # Assuming it's stored in the database
 
     # Generate graphs for levels, percentages, and volumes
-    level_fig = px.area(df, x='date', y='reservoir_level', title=f"{reservoir.reservoir_name} Levels")
+    level_fig = px.area(df, x='date', y='reservoir_level',
+                        labels={'x': 'Date', 'y': 'Reservoir Level'},
+                        title=f"{reservoir.reservoir_name} Levels")
     level_fig.add_hline(y=critical_reservoir_level, line_dash="dot", line_color="red", annotation_text="Critical Level")
     level_graphJSON = json.dumps(level_fig, cls=plotly.utils.PlotlyJSONEncoder)
 
-    volume_fig = px.area(df, x='date', y='reservoir_volume', title=f"{reservoir.reservoir_name} Volumes")
+    volume_fig = px.area(df, x='date', y='reservoir_volume',
+                         labels={'x': 'Date', 'y': 'Reservoir Volume'},
+                         title=f"{reservoir.reservoir_name} Volumes")
     volume_graphJSON = json.dumps(volume_fig, cls=plotly.utils.PlotlyJSONEncoder)
 
 

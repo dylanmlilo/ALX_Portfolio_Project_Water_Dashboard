@@ -5,7 +5,7 @@
     <h1>{{ dam['dam_name'] }}</h1>
 </div>
 <div class="stats_background">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu leo purus. Maecenas euismod semper magna nec blandit. In hac habitasse platea dictumst. Vivamus vestibulum est laoreet sapien scelerisque interdum. Donec placerat quam in pulvinar hendrerit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+    <p>{{ dam['dam_description'] }}</p>
 </div>
 <div class="container h-100 d-flex justify-content-center align-items-center stats_percentage_container">
     <div class="row">
@@ -28,10 +28,6 @@
     <div id="graph3" class="graph-container" data-aos="slide-up">
     </div>
 </div>
-<div class="testt">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt quod delectus impedit nesciunt ullam a blanditiis doloremque nemo error. Velit ipsum molestias, officiis magni sit quam laborum vitae ducimus ratione unde accusantium fuga fugiat? Neque aliquam ex numquam placeat unde, sapiente molestiae illo eveniet blanditiis rerum quas earum eligendi quia mollitia explicabo illum quam? Facere, corporis quos qui quisquam deserunt officiis aliquam commodi harum doloribus, facilis dicta laborum atque minima ex tenetur voluptatibus similique maiores labore? Dolorem excepturi aliquam cupiditate corporis labore recusandae delectus quis. Velit vero tenetur voluptatem autem earum! Fugiat vitae praesentium blanditiis, iure repellat in ullam quas.</p>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam provident repudiandae debitis corporis, adipisci quasi mollitia quam necessitatibus explicabo nostrum ad officia at soluta ipsam vero nemo eum cupiditate veniam esse dolore ab voluptatum minima fuga. Delectus inventore fuga doloremque officia nisi dicta non deleniti ad, commodi culpa quas saepe asperiores beatae perspiciatis aspernatur omnis! Ea nemo, suscipit dolores deserunt harum totam. Quos necessitatibus, quia illo numquam iusto natus saepe molestias ex perferendis quidem tenetur a? Rem similique ex illum culpa accusantium molestias quidem consectetur debitis, dolores pariatur perspiciatis incidunt voluptatibus iure, adipisci amet, magnam fugit temporibus laudantium ipsa minima.</p>
-  </div>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
    var dam_graph1 = {{ dam_graph1JSON|safe}}

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, Date, PrimaryKeyConstraint, DECIMAL
+from sqlalchemy import Column, Integer, String, Float, Date, Text, PrimaryKeyConstraint, DECIMAL
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -9,6 +9,7 @@ class Dams(Base):
 
     id = Column(Integer, primary_key=True)
     dam_name = Column(String(255), nullable=False)
+    dam_description = Column(Text)
     
     def __repr__(self):
             return f"<Dam(dam_name='{self.dam_name}')>"

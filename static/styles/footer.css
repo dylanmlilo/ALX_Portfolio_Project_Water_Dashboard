@@ -1,0 +1,21 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(5, 59, 141, 0.767);
+    margin-bottom: -200px;
+  }
+
+.footer a, .footer p {
+    color: whitesmoke!important;
+}
+
+.footer .vision {
+    font-size: x-large;
+    text-shadow: 1px 1px 4px #000;
+}
+
+.footer .nav {
+    margin-top: 10px;
+    font-size: larger;
+}

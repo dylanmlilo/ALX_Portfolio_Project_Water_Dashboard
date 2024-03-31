@@ -1,0 +1,24 @@
+.navbar {
+    height: 70px;
+    padding: 0px 0px 5px;
+}
+
+nav .navbar-brand #logo {
+    width: 36px;
+    height: 45px;
+    margin: 10px;
+}
+
+.navbarNav .navbar-nav .nav-item .nav-link {
+    margin: 0px 3px 5px 3px;
+}
+
+.navbarNav .navbar-nav .nav-item .btn {
+  margin: 0px 0px 0px 4px; 
+}
+
+
+.search_bar {
+    margin-right: 10px;
+    margin-top: 10px;
+}

@@ -1,0 +1,137 @@
+.main_graph {
+    width: 100%;
+    background-color: rgb(206, 188, 194);
+}
+
+.stats-container {
+    height: 250px;
+    /* margin-top: 70px; */
+    text-align: center;
+    background: url("../images/dam_sample3.jpg") no-repeat center;
+    padding-top: 40px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: whitesmoke;
+    text-shadow: 4px 4px 16px #000
+}
+
+.stats-container h1 {
+    font-size: 60px;
+}
+
+.stats_percentage_container .stats_percentage {
+    text-shadow: 1px 1px 2px #000;
+    font-size: xx-large;
+    color: #0d91b3;
+}
+  
+.stats_percentage_container .stats_percentage.unit_low {
+    color: red;
+}
+
+.date {
+    font-size: x-large;
+}
+
+
+.stats_background {
+    padding: 20px;
+    background-color: lightgray;
+}
+  
+.graph1, .graph2, .graph3 {
+    margin: 10px;
+    /* text-align: center;
+    color: whitesmoke;
+    text-shadow: 2px 2px 4px #000; */
+}
+
+.stats_data_container {
+    background: rgba(174, 219, 219, 0.767);
+    width: 1000px;
+    margin-top: 100px;
+    border: 2px solid #948d8d;
+    border-radius: 10px;
+}
+
+.stats_data_container :hover {
+    background: rgb(138, 223, 223);
+    border-radius: 10px;
+}
+
+.stats_data_container .btn {
+    float: right;
+}
+
+.stats_data_container .back-btn {
+    margin-bottom: 10px;
+    margin-left: 4px;
+}
+
+.stats_percentage_container {
+    margin-top: 20px;
+    padding: 2rem;
+}
+
+.stats_percentage_container .card-body {
+    background-color: #e0ffff;  /* Light blue color */
+    border-radius: 5px;
+}
+
+.admin-dashboard_title, .login-title{
+    margin-top: 100px;
+}
+
+.admin-dashboard_select {
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+.form-container {
+  margin-top: 30px;
+}
+
+.form-container div {
+    display: block;
+    margin: 20px 0 0 0;
+}
+
+.form-container .btn {
+  margin: 0 50px 0 0;
+}
+
+.modal-body {
+  text-align: left;
+}
+
+.modal-body .form-control {
+  margin-bottom: 10px;
+}
+
+.left-aligned-button {
+  float: left;
+}
+
+.left-aligned-text {
+  text-align: left;
+}
+
+.graph-container {
+    width: 1300px;
+    height: 500px;
+    margin: 20px auto;
+    background: #0d91b3;
+}
+
+.logadmin_container {
+    background: rgba(47, 182, 182, 0.767);
+    width: 1000px;
+    height: 280px;
+    margin: 135px auto;
+    border-radius: 20px;
+    color: whitesmoke;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.logadmin_container h1 {
+    padding-top: 25px;
+}

@@ -87,15 +87,21 @@ def reservoir_data_to_dict_list(reservoir_name=None, reservoir_id=None):
 
 
 def current_reservoir_levels(reservoir_name):
-    current_reservoir_level = (
+    current_level = (
         session.query(ReservoirData.reservoir_level)
         .join(Reservoirs, Reservoirs.id == ReservoirData.reservoir_id)
         .filter(Reservoirs.reservoir_name == reservoir_name)
         .order_by(ReservoirData.date.desc())
         .first()
     )
-    
-    return current_reservoir_level
+
+    # Check if a row was returned (data exists)
+    if current_level is not None:
+        # Extract the actual level value from the first element of the tuple
+        return current_level[0]  # Assuming reservoir_level is the first column
+    else:
+        # Handle case where no data is found (optional: return default value or raise exception)
+        return None  # Or handle differently as needed
 
 def current_dam_percentages(dam_name):
     current_dam_percentage = session.query(DamData.dam_percentage) \

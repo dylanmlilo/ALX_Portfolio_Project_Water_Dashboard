@@ -45,11 +45,11 @@ def graph():
 
 @app.route('/', strict_slashes=False)
 def index():
-    graph1JSON, graph2JSON, plot_json = plot_home_page_charts()
+    graph1JSON, graph2JSON, gauge_json = plot_home_page_charts()
     
     return render_template("home.html", graph1JSON=graph1JSON,
                            graph2JSON=graph2JSON,
-                           plot_json=plot_json)
+                           gauge_json=gauge_json)
 
 
 @app.route('/login', strict_slashes=False, methods=['GET', 'POST'])
@@ -237,8 +237,6 @@ def reservoir(reservoir_name):
     level_graphJSON, volume_graphJSON = plot_reservoir_level_charts(reservoir_name)
     
     current_reservoir_level = current_reservoir_levels(reservoir_name)
-    
-    current_reservoir_level = current_reservoir_level[0] if current_reservoir_level else None
 
     formatted_date = today_date()
 

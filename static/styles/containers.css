@@ -144,3 +144,11 @@
     padding-top: 25px;
 }
 
+
+.gauge_charts_container {
+    display: flex;
+    /* justify-content: space-around;
+   overflow: auto; */
+}
+
+

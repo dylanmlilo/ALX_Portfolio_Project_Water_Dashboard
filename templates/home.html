@@ -6,7 +6,13 @@
     <h1>City of Bulawayo Water Department</h1>
     <h2>Water Supply and Distribution Statistics Dashboard</h2>
   </div>
-  <div id="speedometer"></div>
+  <div class="gauge_charts_container">
+  <!-- Loop through gauge_json and create divs for each gauge chart -->
+  {% for gauge_data in gauge_json %}
+  <div id="gauge{{ loop.index }}" class="gauge_chart"></div>
+  {% endfor %}
+  </div>
+
   <div id="graph-container1" class="graph-container"></div>
   <div id="graph-container2" class="graph-container"></div>
   <div class="testt">
@@ -15,11 +21,19 @@
   </div>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
-  var plotJson = {{ plot_json | safe }};
-  Plotly.plot('speedometer', plotJson, {responsive: true});
-  var graph1 = {{ graph1JSON|safe}};
-  Plotly.plot('graph-container1', graph1, {responsive: true});
-  var graph2 = {{ graph2JSON|safe}};
-  Plotly.plot('graph-container2', graph2, {responsive: true});
+        // Load area plots
+        var graph1Data = {{ graph1JSON | safe }};
+        Plotly.newPlot('graph-container1', graph1Data);
+
+        var graph2Data = {{ graph2JSON | safe }};
+        Plotly.newPlot('graph-container2', graph2Data);
+
+        // Load gauge charts
+        var gaugeData = {{ gauge_json | safe }};
+        gaugeData.forEach(function(data, index) {
+            var divId = 'gauge' + (index + 1);
+            var div = document.getElementById(divId);
+            Plotly.newPlot(div, JSON.parse(data));
+        });
 </script>
 {% endblock %}

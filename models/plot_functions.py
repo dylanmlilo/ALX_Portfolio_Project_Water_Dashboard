@@ -5,7 +5,7 @@ import json
 import plotly
 import plotly_express as px
 import plotly.graph_objects as go
-from models.engine.database import session, dams_data_to_dict_list, reservoir_data_to_dict_list
+from models.engine.database import session, dams_data_to_dict_list, reservoir_data_to_dict_list, current_reservoir_levels
 from models.dams import Dams, DamData
 from models.reservoirs import Reservoirs, ReservoirData
 from datetime import datetime, timedelta
@@ -33,34 +33,43 @@ def plot_home_page_charts():
     graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
     graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
     
-    # Define the reservoir levels
-    reservoir_level = 75
-    critical_reservoir_level = 50
-    maximum_reservoir_level = 100
+    reservoir_names = session.query(Reservoirs.reservoir_name).all()
+    reservoir_names = [name[0] for name in reservoir_names]
     
-    # Create a figure for the speedometer plot
-    fig = go.Figure()
+    gauge_figures = []
+    for reservoir_name in reservoir_names:
+        reservoir = session.query(Reservoirs).filter(Reservoirs.reservoir_name == reservoir_name).first()
+        try:
+            current_level = current_reservoir_levels(reservoir_name)
+            maximum_level = reservoir.max_level
+            critical_level = reservoir.critical_level
 
-    # Add a gauge chart to the figure
-    fig.add_trace(go.Indicator(
-        mode = "gauge+number",
-        value = reservoir_level,
-        domain = {'x': [0, 1], 'y': [0, 1]},
-        title = {'text': "Reservoir Level"},
-        gauge = {
-            'axis': {'range': [0, maximum_reservoir_level]},
-            'bar': {'color': "blue"},
-            'steps' : [
-                {'range': [0, critical_reservoir_level], 'color': "red"},
-                {'range': [critical_reservoir_level, maximum_reservoir_level], 'color': "green"}
-            ],
-        }
-    ))
+            fig = go.Figure()
 
-    # Convert the figure to JSON
-    plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+            # Add a gauge chart to the figure
+            fig.add_trace(go.Indicator(
+                mode = "gauge+number",
+                value = current_level,
+                domain = {'x': [0, 1], 'y': [0, 1]},
+                title = {'text': f"{reservoir_name} Reservoir Level"},
+                gauge = {
+                    'axis': {'range': [0, maximum_level]},
+                    'bar': {'color': "blue"},
+                    'steps' : [
+                        {'range': [0, critical_level], 'color': "red"},
+                        {'range': [critical_level, maximum_level], 'color': "green"}
+                    ],
+                }
+            ))
+            gauge_figures.append(fig)
+
+        except Exception as e:
+            # Handle potential errors (e.g., reservoir not found)
+            print(f"Error fetching data for {reservoir_name}: {e}")
+        
+    gauge_json = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in gauge_figures]  
     
-    return graph1JSON, graph2JSON, plot_json
+    return graph1JSON, graph2JSON, gauge_json
     
 def plot_reservoir_level_charts(reservoir_name):
     

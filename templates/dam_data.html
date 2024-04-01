@@ -12,7 +12,7 @@
             data-toggle="modal" data-target="#myDamModal"> Add New Data </button>
         </h2>
 
-        <table class="table table-hover">
+        <table class="table table-hover table-bordered">
 
           <tr class="table-dark">
             <th>ID</th>
@@ -37,11 +37,13 @@
             <td> 
               <a href="/delete_dam_data/{{ dam_data.id }}" class="btn btn-danger btn-xs"
                 onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
-              <a href="/update_dam_data/{{ dam_data.id }}" class="btn btn-warning btn-xs" style="margin-right: 5px;"
+              <a href="/update_dam_data/{{ dam_data.id }}" class="btn btn-warning btn-xs update-btn"
                 data-toggle="modal" data-target="#updateDamModal{{ dam_data.id }}">Edit</a>
             </td>
           </tr>
 
+          {% include "add_dam_modal.html" %}
+          {% include "update_dam_modal.html" %}
           {% endfor %}
 
         </table>

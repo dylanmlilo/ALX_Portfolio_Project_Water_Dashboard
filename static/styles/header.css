@@ -22,3 +22,16 @@ nav .navbar-brand #logo {
     margin-right: 10px;
     margin-top: 10px;
 }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-link {
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    /* text-decoration: underline; */
+    border-bottom: 1px solid blue;
+} 

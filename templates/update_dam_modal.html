@@ -14,13 +14,13 @@
             </div>
             <div class="form-group">
               <label> Select Dam <span style="color: red;">*</span></label>
-              <select class="form-control" name="dam_id" required>
-                  <option value="1">Inyankuni Dam</option>
-                  <option value="2">Insiza Mayfair Dam</option>
-                  <option value="3">Mtshabezi Dam</option>
-                  <option value="4">uMzingwane Dam</option>
-                  <option value="5">Lower Ncema Dam</option>
-                  <option value="6">Upper Ncema Dam</option>
+              <select class="form-control custom-select" name="dam_id" required>
+                <option value="1" {% if dam_data.dam_id == 1 %} selected {% endif %}>Inyankuni Dam</option>
+                <option value="2" {% if dam_data.dam_id == 2 %} selected {% endif %}>Insiza Mayfair Dam</option>
+                <option value="3" {% if dam_data.dam_id == 3 %} selected {% endif %}>Mtshabezi Dam</option>
+                <option value="4" {% if dam_data.dam_id == 4 %} selected {% endif %}>uMzingwane Dam</option>
+                <option value="5" {% if dam_data.dam_id == 5 %} selected {% endif %}>Lower Ncema Dam</option>
+                <option value="6" {% if dam_data.dam_id == 6 %} selected {% endif %}>Upper Ncema Dam</option>
               </select>
             </div>
             <div class="form-group">
@@ -39,9 +39,9 @@
                 pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number" required>
             </div>
             <div class="form-group">
-                <label>Daily Inflow</label>
-                <input type="text" class="form-control" name="daily_inflow" value="{{ dam_data.daily_inflow }}"
-                pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number">
+              <label>Daily Inflow</label>
+              <input type="text" class="form-control" name="daily_inflow" value="{{ dam_data.daily_inflow or '' }}"
+                     pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number">
             </div>
             <div class="form-group">
                 <button class="btn btn-primary left-aligned-button" style="float: left;" type="submit">Update</button>

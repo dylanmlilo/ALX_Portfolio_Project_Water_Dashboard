@@ -1,46 +1,42 @@
 {% block content %}
-<!-- Update Modal -->
+<!-- Update Reservoir Modal -->
 <div class="modal fade" id="updateReservoirModal{{ reservoir_data.id }}" tabindex="-1" role="dialog" aria-labelledby="updateReservoirModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="updateModalLabel">Edit Form</h5>
+          <h5 class="modal-title" id="updateReservoirModalLabel">Edit Form</h5>
         </div>
         <div class="modal-body">
-          <form action="" method="post">
+          <form action="{{ url_for('update_reservoir_data', reservoir_data_id=reservoir_data.id) }}" method="post">
             <div class="form-group">
                 <label>Date <span style="color: red;">*</span></label>
                 <input type="date" class="form-control" name="date" value="{{ reservoir_data.date }}" required>
             </div>
             <div class="form-group">
-              <label> Select Dam <span style="color: red;">*</span></label>
-              <select class="form-control" name="dam_id" required>
-                  <option value="1">Inyankuni Dam</option>
-                  <option value="2">Insiza Mayfair Dam</option>
-                  <option value="3">Mtshabezi Dam</option>
-                  <option value="4">uMzingwane Dam</option>
-                  <option value="5">Lower Ncema Dam</option>
-                  <option value="6">Upper Ncema Dam</option>
+              <label>Select Reservoir <span style="color: red;">*</span></label>
+              <select class="form-control custom-select" name="reservoir_id" required>
+                <option value="1" {% if reservoir_data.reservoir_id == 1 %} selected {% endif %}>Magwegwe Reservoir</option>
+                <option value="2" {% if reservoir_data.reservoir_id == 2 %} selected {% endif %}>Hillside Reservoir</option>
+                <option value="3" {% if reservoir_data.reservoir_id == 3 %} selected {% endif %}>Rifle Range Reservoir</option>
+                <option value="4" {% if reservoir_data.reservoir_id == 4 %} selected {% endif %}>6J Reservoir</option>
+                <option value="5" {% if reservoir_data.reservoir_id == 5 %} selected {% endif %}>Tuli Reservoir</option>
+                <option value="6" {% if reservoir_data.reservoir_id == 6 %} selected {% endif %}>Criterion Clear Reservoir</option>
+                <option value="7" {% if reservoir_data.reservoir_id == 7 %} selected {% endif %}>Criterion Raw Reservoir</option>
               </select>
             </div>
             <div class="form-group">
-                <label>Dam Reading <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" name="dam_reading" value="{{ reservoir_data.dam_reading }}"
+                <label>Reservoir Level <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="reservoir_level" value="{{ reservoir_data.reservoir_level }}"
                 pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number" required>
             </div>
             <div class="form-group">
-                <label>Dam Percentage <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" name="dam_percentage" value="{{ reservoir_data.dam_percentage }}" 
+                <label>Reservoir Percentage <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="reservoir_percentage" value="{{ reservoir_data.reservoir_percentage}}" 
                 pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number" required>
             </div>
             <div class="form-group">
-                <label>Dam Volume <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" name="dam_volume" value="{{ reservoir_data.dam_volume }}"
-                pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number" required>
-            </div>
-            <div class="form-group">
-                <label>Daily Inflow</label>
-                <input type="text" class="form-control" name="daily_inflow" value="{{ reservoir_data.daily_inflow }}"
+                <label>Reservoir Volume </label>
+                <input type="text" class="form-control" name="reservoir_volume" value="{{ reservoir_data.reservoir_volume or '' }}"
                 pattern="[0-9]+(\.[0-9]+)?" title="Please enter a valid decimal number">
             </div>
             <div class="form-group">
@@ -55,10 +51,10 @@
     </div>
   </div>
 <script>
-    document.getElementById('damName').addEventListener('change', function() {
-        var selectedDamName = this.value;
-        var selectedDamId = getDamIdFromDatabase(selectedDamName); // Function to fetch dam_id from the database
-        document.getElementById('selectedDamId').value = selectedDamId;
+    document.getElementById('reservoirName').addEventListener('change', function() {
+        var selectedReservoirName = this.value;
+        var selectedReservoirId = getDamIdFromDatabase(selectedReservoirName); // Function to fetca.id from the database
+        document.getElementById('selectedReservoirId').value = selectedReservoirId;
     });
 </script>
 {% endblock %}

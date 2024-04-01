@@ -46,20 +46,29 @@
 }
 
 .stats_data_container {
-    background: rgba(174, 219, 219, 0.767);
+    background: rgba(174, 219, 219, 0.6);
     width: 1000px;
     margin-top: 100px;
     border: 2px solid #948d8d;
     border-radius: 10px;
+
 }
 
-.stats_data_container :hover {
-    background: rgb(138, 223, 223);
+.stats_data_container:hover {
+    background: rgba(174, 219, 219, 1);
     border-radius: 10px;
+}
+
+.stats_data_container .table tr td:hover {
+    background: rgb(138, 223, 223);
 }
 
 .stats_data_container .btn {
     float: right;
+}
+
+.stats_data_container .update-btn.btn {
+    margin-right: 5px;
 }
 
 .stats_data_container .back-btn {
@@ -73,7 +82,7 @@
 }
 
 .stats_percentage_container .card-body {
-    background-color: #e0ffff;  /* Light blue color */
+    background-color: #e0ffff;
     border-radius: 5px;
 }
 
@@ -119,19 +128,19 @@
     width: 1300px;
     height: 500px;
     margin: 20px auto;
-    background: #0d91b3;
 }
 
 .logadmin_container {
-    background: rgba(47, 182, 182, 0.767);
+    background: linear-gradient(to right, rgba(47, 182, 182, 0.767), rgba(47, 182, 182, 0.6), rgba(47, 182, 182, 0.767));
     width: 1000px;
     height: 280px;
     margin: 135px auto;
     border-radius: 20px;
     color: whitesmoke;
     text-shadow: 1px 1px 2px #000;
-}
+  }
 
 .logadmin_container h1 {
     padding-top: 25px;
 }
+

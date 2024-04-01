@@ -207,6 +207,7 @@ def delete_dam_data(dam_data_id):
 def update_dam_data(dam_data_id):
     if request.method == 'POST':
         try:
+            daily_inflow = None
             dam_data = session.query(DamData).filter_by(id=dam_data_id).first()
             if dam_data:
                 dam_data.dam_id = request.form.get('dam_id')
@@ -214,21 +215,22 @@ def update_dam_data(dam_data_id):
                 dam_data.dam_reading = request.form.get('dam_reading')
                 dam_data.dam_percentage = request.form.get('dam_percentage')
                 dam_data.dam_volume = request.form.get('dam_volume')
-                dam_data.daily_inflow = request.form.get('daily_inflow')
-                
+                daily_inflow = request.form.get('daily_inflow')
+
                 errors = []
-                
+
                 if daily_inflow is None or daily_inflow == '':
-                    daily_inflow = None
+                    dam_data.daily_inflow = None
                 else:
                     try:
-                        daily_inflow = float(daily_inflow)
+                       daily_inflow = float(daily_inflow)
                     except ValueError:
-                        errors.append("daily_inflow must be a valid number")
-
+                       errors.append("daily_inflow must be a valid number")
 
                 if errors:
                     return jsonify({'errors': errors}), 400
+                
+                dam_data.daily_inflow = daily_inflow
 
                 session.commit()
                 flash('Data updated successfully')
@@ -239,6 +241,7 @@ def update_dam_data(dam_data_id):
         except Exception as e:
             session.rollback()
             return jsonify({'error': str(e)}), 400
+
         
 @app.route('/reservoirs/<string:reservoir_name>', strict_slashes=False)
 def reservoir(reservoir_name):
@@ -268,13 +271,13 @@ def reservoir(reservoir_name):
     # Generate graphs for levels, percentages, and volumes
     level_fig = px.area(df, x='date', y='reservoir_level',
                         labels={'x': 'Date', 'y': 'Reservoir Level'},
-                        title=f"{reservoir.reservoir_name} Levels")
+                        title=f"{reservoir.reservoir_name} Reservoir Levels")
     level_fig.add_hline(y=critical_reservoir_level, line_dash="dot", line_color="red", annotation_text="Critical Level")
     level_graphJSON = json.dumps(level_fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     volume_fig = px.area(df, x='date', y='reservoir_volume',
                          labels={'x': 'Date', 'y': 'Reservoir Volume'},
-                         title=f"{reservoir.reservoir_name} Volumes")
+                         title=f"{reservoir.reservoir_name} Reservoir Volumes")
     volume_graphJSON = json.dumps(volume_fig, cls=plotly.utils.PlotlyJSONEncoder)
 
 
@@ -307,6 +310,96 @@ def reservoir_data():
     reservoir_data = reservoir_data_to_dict_list()
     return render_template('reservoir_data.html', reservoir_data_list=reservoir_data)
 
+
+@app.route('/insert_reservoir_data', methods=['POST'])
+def insert_reservoir_data():
+    if request.method == 'POST':
+        try:
+            reservoir_id = request.form.get('reservoir_id')
+            date = request.form.get('date')
+            reservoir_level = request.form.get('reservoir_level')
+            reservoir_percentage = request.form.get('reservoir_percentage')
+            reservoir_volume = request.form.get('reservoir_volume')
+
+            # Validation checks
+            errors = []
+
+            if not reservoir_volume:
+                reservoir_volume = None
+            else:
+                try:
+                    reservoir_volume = float(reservoir_volume)
+                except ValueError:
+                    errors.append("reservoir_volume must be a valid number")
+
+            if errors:
+                return jsonify({'errors': errors}), 400
+
+            new_reservoir_record = ReservoirData(reservoir_id=reservoir_id, date=date,
+                                     reservoir_level=reservoir_level,
+                                     reservoir_percentage=reservoir_percentage,
+                                     reservoir_volume=reservoir_volume)
+            
+            session.add(new_reservoir_record)
+            session.commit()
+            flash('Data inserted successfully')
+            return redirect(url_for('reservoir_data'))
+
+        except Exception as e:
+            session.rollback()
+            return jsonify({'error': str(e)}), 400
+        
+@app.route('/update_reservoir_data/<int:reservoir_data_id>', methods=['POST'])
+@login_required
+def update_reservoir_data(reservoir_data_id):
+    if request.method == 'POST':
+        try:
+            reservoir_volume = None
+            reservoir_data = session.query(ReservoirData).filter_by(id=reservoir_data_id).first()
+            if reservoir_data:
+                reservoir_data.reservoir_id = request.form.get('reservoir_id')
+                reservoir_data.date = request.form.get('date')
+                reservoir_data.reservoir_level = request.form.get('reservoir_level')
+                reservoir_data.reservoir_percentage = request.form.get('reservoir_percentage')
+                reservoir_volume = request.form.get('reservoir_volume')
+
+                errors = []
+
+                if reservoir_volume is None or reservoir_volume == '':
+                    reservoir_data.reservoir_volume = None
+                else:
+                    try:
+                       reservoir_volume = float(reservoir_volume)
+                    except ValueError:
+                       errors.append("reservoir_volume must be a valid number")
+
+                if errors:
+                    return jsonify({'errors': errors}), 400
+                
+                reservoir_data.reservoir_volume = reservoir_volume
+
+                session.commit()
+                flash('Data updated successfully')
+                return redirect(url_for('reservoir_data'))
+            else:
+                return jsonify({'error': 'Reservoir data not found'}), 404
+
+        except Exception as e:
+            session.rollback()
+            return jsonify({'error': str(e)}), 400
+
+
+@app.route("/SIVvsConsumption", strict_slashes=False, methods=['GET', 'POST'])
+def SIVvsConsumption():
+    return render_template("SIVvsConsumption.html")
+
+@app.route("/ChemicalStockLevels", strict_slashes=False)
+def ChemicalStockLevels():
+    return render_template("ChemicalStockLevels.html")
+
+@app.route("/PumpingStatistics", strict_slashes=False)
+def PumpingStatistics():
+    return render_template("PumpingStatistics.html")
                 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)

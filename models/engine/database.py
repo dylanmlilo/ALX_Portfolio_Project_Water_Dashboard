@@ -86,6 +86,26 @@ def reservoir_data_to_dict_list(reservoir_name=None, reservoir_id=None):
   return sorted_result_list
 
 
+def current_reservoir_levels(reservoir_name):
+    current_reservoir_level = (
+        session.query(ReservoirData.reservoir_level)
+        .join(Reservoirs, Reservoirs.id == ReservoirData.reservoir_id)
+        .filter(Reservoirs.reservoir_name == reservoir_name)
+        .order_by(ReservoirData.date.desc())
+        .first()
+    )
+    
+    return current_reservoir_level
+
+def current_dam_percentages(dam_name):
+    current_dam_percentage = session.query(DamData.dam_percentage) \
+                                 .join(Dams, Dams.id == DamData.dam_id) \
+                                 .filter(Dams.dam_name == dam_name) \
+                                 .order_by(DamData.date.desc()) \
+                                 .first()
+                                 
+    return current_dam_percentage
+
 
 # dam_data = dams_data_to_dict_list(dam_name="uMzingwane Dam")
 # #"uMzingwane Dam"

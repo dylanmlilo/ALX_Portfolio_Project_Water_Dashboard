@@ -45,13 +45,13 @@ def graph():
 
 @app.route('/', strict_slashes=False)
 def index():
-    graph1JSON, graph2JSON, gauge_json = plot_home_page_charts()
+    graph1JSON, graph2JSON, gauge_reservoir_json, gauge_dam_json = plot_home_page_charts()
     
     date = today_date()
     
     return render_template("home.html", graph1JSON=graph1JSON,
-                           graph2JSON=graph2JSON,
-                           gauge_json=gauge_json, date=date)
+                           graph2JSON=graph2JSON,gauge_dam_json=gauge_dam_json,
+                           gauge_reservoir_json=gauge_reservoir_json, date=date)
 
 
 @app.route('/login', strict_slashes=False, methods=['GET', 'POST'])
@@ -107,10 +107,7 @@ def dam(dam_name):
     critical_dam_percentage = 40
     current_dam_percentage = current_dam_percentages(dam_name)
     
-    dam_graph1JSON, dam_graph2JSON, dam_graph3JSON = plot_dam_level_charts(dam_name)
-
-    if current_dam_percentage is not None:
-        current_dam_percentage = current_dam_percentage[0] 
+    dam_graph1JSON, dam_graph2JSON, dam_graph3JSON = plot_dam_level_charts(dam_name) 
     
     return render_template('dam_page.html', dam=dam, dam_data=dam_data, 
                            today_date=formatted_date, critical_dam_percentage=critical_dam_percentage, 

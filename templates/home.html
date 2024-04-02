@@ -9,14 +9,22 @@
   <div class="date"><h2>{{ date }}</h2></div>
   <div class="sub-heading"><h2>Reservoir Levels</h2></div>
   <div class="row gauge_charts_container">
-  <!-- Loop through gauge_json and create divs for each gauge chart -->
-  {% for gauge_data in gauge_json %}
-  <div id="gauge{{ loop.index }}" class="gauge_chart col-md-4 {% if loop.index == 7 %} center-chart {% endif %}"></div>
-  {% endfor %}
+      <!-- Loop through gauge_json and create divs for each gauge_reservoir chart -->
+      {% for gauge_data in gauge_reservoir_json %}
+      <div id="gauge_reservoir{{ loop.index }}" class="gauge_chart col-md-4 
+      {% if loop.index == 7 %} center-chart {% endif %}">
+      </div>
+      {% endfor %}
   </div>
-
-  <div id="graph-container1" class="graph-container"></div>
   <div id="graph-container2" class="graph-container"></div>
+  <div class="sub-heading"><h2>Dam Percentages</h2></div>
+  <div class="row gauge_charts_container">
+      {% for gauge_data in gauge_dam_json %}
+      <div id="gauge_dam{{ loop.index }}" class="gauge_chart col-md-4"></div>
+      {% endfor %}
+  </div>
+  </div>
+  <div id="graph-container1" class="graph-container"></div>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
         // Load area plots
@@ -26,10 +34,17 @@
         var graph2Data = {{ graph2JSON | safe }};
         Plotly.newPlot('graph-container2', graph2Data);
 
-        // Load gauge charts
-        var gaugeData = {{ gauge_json | safe }};
-        gaugeData.forEach(function(data, index) {
-            var divId = 'gauge' + (index + 1);
+        // Load gauge_reservoir charts
+        var gaugeReservoirData = {{ gauge_reservoir_json | safe }};
+        gaugeReservoirData.forEach(function(data, index) {
+            var divId = 'gauge_reservoir' + (index + 1);
+            var div = document.getElementById(divId);
+            Plotly.newPlot(div, JSON.parse(data));
+        });
+        // Load gauge_dam charts
+        var gaugeDamData = {{ gauge_dam_json | safe }};
+        gaugeDamData.forEach(function(data, index) {
+            var divId = 'gauge_dam' + (index + 1);
             var div = document.getElementById(divId);
             Plotly.newPlot(div, JSON.parse(data));
         });

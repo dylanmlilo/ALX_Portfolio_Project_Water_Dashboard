@@ -110,6 +110,9 @@ def current_dam_percentages(dam_name):
                                  .order_by(DamData.date.desc()) \
                                  .first()
                                  
+    if current_dam_percentage is not None:
+        current_dam_percentage = current_dam_percentage[0]
+                                 
     return current_dam_percentage
 
 
@@ -127,7 +130,7 @@ def current_dam_percentages(dam_name):
 
 
 
-# session.commit()
-# session.rollback()
+session.commit()
+session.rollback()
 
 #dam_name="uMzingwane Dam"

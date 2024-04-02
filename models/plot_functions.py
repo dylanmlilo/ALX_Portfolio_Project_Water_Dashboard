@@ -5,7 +5,7 @@ import json
 import plotly
 import plotly_express as px
 import plotly.graph_objects as go
-from models.engine.database import session, dams_data_to_dict_list, reservoir_data_to_dict_list, current_reservoir_levels
+from models.engine.database import session, dams_data_to_dict_list, reservoir_data_to_dict_list, current_reservoir_levels, current_dam_percentages
 from models.dams import Dams, DamData
 from models.reservoirs import Reservoirs, ReservoirData
 from datetime import datetime, timedelta
@@ -36,7 +36,7 @@ def plot_home_page_charts():
     reservoir_names = session.query(Reservoirs.reservoir_name).all()
     reservoir_names = [name[0] for name in reservoir_names]
     
-    gauge_figures = []
+    gauge_reservoir_figures = []
     for reservoir_name in reservoir_names:
         reservoir = session.query(Reservoirs).filter(Reservoirs.reservoir_name == reservoir_name).first()
         try:
@@ -45,33 +45,90 @@ def plot_home_page_charts():
             critical_level = reservoir.critical_level
 
             fig = go.Figure()
+            
+            num_ticks = 7
 
-            # Add a gauge chart to the figure
+            tickvals = [round(i * (maximum_level / (num_ticks - 1)), 2) for i in range(num_ticks)]
+            ticktext = [str(val) for val in tickvals]
+
             fig.add_trace(go.Indicator(
                 mode = "gauge+number",
                 value = current_level,
                 domain = {'x': [0, 1], 'y': [0, 1]},
                 title = {'text': f"{reservoir_name} Reservoir Level"},
                 gauge = {
-                    'axis': {'range': [0, maximum_level]},
-                    'bar': {'color': "blue"},
+                    'axis': {
+                            'range': [0, maximum_level],
+                            'tickvals': tickvals,
+                            'ticktext': ticktext,
+                            'tickfont': {'size': 13},
+                        },
+                    'bar': {'color': "rgba(50, 50, 255, 0.9)"},
                     'steps' : [
-                        {'range': [0, critical_level], 'color': "red"},
-                        {'range': [critical_level, maximum_level], 'color': "green"}
+                        {'range': [0, critical_level], 'color': "rgba(255, 0, 0, 0.850)"},
+                        {'range': [critical_level, maximum_level], 'color': "rgba(47, 182, 182, 0.767)"}
                     ],
                 }
             ))
-            fig.update_layout(margin=dict(t=0, b=0, l=20, r=20))
+            fig.update_layout(margin=dict(t=0, b=0, l=40, r=50))
             fig.update_layout(height=450, width=400)
-            gauge_figures.append(fig)
+            gauge_reservoir_figures.append(fig)
 
         except Exception as e:
-            # Handle potential errors (e.g., reservoir not found)
             print(f"Error fetching data for {reservoir_name}: {e}")
         
-    gauge_json = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in gauge_figures]  
+    gauge_reservoir_json = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in gauge_reservoir_figures]
     
-    return graph1JSON, graph2JSON, gauge_json
+    
+    
+    
+    dam_names = session.query(Dams.dam_name).all()
+    dam_names = [name[0] for name in dam_names]
+    
+    gauge_dam_figures = []
+    for dam_name in dam_names:
+        dam = session.query(Dams).filter(Dams.dam_name == dam_name).first()
+        try:
+            current_level = current_dam_percentages(dam_name)
+            maximum_level = 100
+            critical_level = 30
+
+            fig = go.Figure()
+            
+            num_ticks = 7
+
+            tickvals = [round(i * (maximum_level / (num_ticks - 1)), 2) for i in range(num_ticks)]
+            ticktext = [str(val) for val in tickvals]
+
+            fig.add_trace(go.Indicator(
+                mode = "gauge+number",
+                value = current_level,
+                domain = {'x': [0, 1], 'y': [0, 1]},
+                title = {'text': f"{dam_name} Percentage"},
+                gauge = {
+                    'axis': {
+                            'range': [0, maximum_level],
+                            'tickvals': tickvals,
+                            'ticktext': ticktext,
+                            'tickfont': {'size': 13},
+                        },
+                    'bar': {'color': "rgba(50, 50, 255, 0.9)"},
+                    'steps' : [
+                        {'range': [0, critical_level], 'color': "rgba(255, 0, 0, 0.850)"},
+                        {'range': [critical_level, maximum_level], 'color': "rgba(47, 182, 182, 0.767)"}
+                    ],
+                }
+            ))
+            fig.update_layout(margin=dict(t=0, b=0, l=40, r=50))
+            fig.update_layout(height=450, width=400)
+            gauge_dam_figures.append(fig)
+
+        except Exception as e:
+            print(f"Error fetching data for {dam_name}: {e}")
+        
+    gauge_dam_json = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in gauge_dam_figures] 
+    
+    return graph1JSON, graph2JSON, gauge_reservoir_json, gauge_dam_json
     
 def plot_reservoir_level_charts(reservoir_name):
     

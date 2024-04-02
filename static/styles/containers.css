@@ -160,14 +160,18 @@
     font-size: 3rem;
 }
 
-/* .main_container .sub-heading {
-    width: 1000px;
-    margin: 0 auto;
-    background: ghostwhite;
-} */
+.main_container .sub-heading {
+    width: 500px;
+    margin: 50px auto 0;
+    background: rgba(47, 182, 182, 0.767);
+    padding: 5px 0 10px 0;
+    border-radius: 60px;
+    color: rgba(1, 1, 66, 0.678);
+    /* color: rgba(0, 0, 255, 0.616) */
+}
 
 .main_container .sub-heading h2 {
     margin-top: 20px;
     font-size: x-large;
-    font-size: 4rem;
+    font-size: 3rem;
 }

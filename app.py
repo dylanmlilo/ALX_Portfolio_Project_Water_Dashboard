@@ -47,9 +47,11 @@ def graph():
 def index():
     graph1JSON, graph2JSON, gauge_json = plot_home_page_charts()
     
+    date = today_date()
+    
     return render_template("home.html", graph1JSON=graph1JSON,
                            graph2JSON=graph2JSON,
-                           gauge_json=gauge_json)
+                           gauge_json=gauge_json, date=date)
 
 
 @app.route('/login', strict_slashes=False, methods=['GET', 'POST'])

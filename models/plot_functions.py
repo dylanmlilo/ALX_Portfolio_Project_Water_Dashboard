@@ -61,6 +61,8 @@ def plot_home_page_charts():
                     ],
                 }
             ))
+            fig.update_layout(margin=dict(t=0, b=0, l=20, r=20))
+            fig.update_layout(height=450, width=400)
             gauge_figures.append(fig)
 
         except Exception as e:

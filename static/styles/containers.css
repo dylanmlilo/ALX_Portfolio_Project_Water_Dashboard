@@ -15,12 +15,12 @@
 }
 
 .stats-container h1 {
-    font-size: 60px;
+    font-size: 4rem;
 }
 
 .stats_percentage_container .stats_percentage {
     text-shadow: 1px 1px 2px #000;
-    font-size: xx-large;
+    font-size: 4rem;
     color: #0d91b3;
 }
   
@@ -28,8 +28,8 @@
     color: red;
 }
 
-.date {
-    font-size: x-large;
+.stats_percentage_container .date, .stats_percentage_container h3 {
+    font-size: 2rem;
 }
 
 
@@ -144,11 +144,30 @@
     padding-top: 25px;
 }
 
-
-.gauge_charts_container {
-    display: flex;
-    /* justify-content: space-around;
-   overflow: auto; */
+.center-chart {
+    margin: 0 auto;
 }
 
+.main_container .gauge_charts_container {
+    width: 1300px;
+    margin: 0 auto;
+}
 
+.main_container .date h2 {
+    background: #e0ffff;
+    padding: 20px;
+    text-shadow: 1px 1px 2px #2e2c2c;
+    font-size: 3rem;
+}
+
+/* .main_container .sub-heading {
+    width: 1000px;
+    margin: 0 auto;
+    background: ghostwhite;
+} */
+
+.main_container .sub-heading h2 {
+    margin-top: 20px;
+    font-size: x-large;
+    font-size: 4rem;
+}

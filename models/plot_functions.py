@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 def today_date():
     today_date = datetime.today()
 
-    formatted_date = today_date.strftime('%d-%B-%Y')
+    formatted_date = today_date.strftime('%a, %d %B %Y')
     
     return formatted_date
 
@@ -72,6 +72,7 @@ def plot_home_page_charts():
             ))
             fig.update_layout(margin=dict(t=0, b=0, l=40, r=50))
             fig.update_layout(height=450, width=400)
+            fig.update_layout(paper_bgcolor='rgba(0, 0, 0, 0)')
             gauge_reservoir_figures.append(fig)
 
         except Exception as e:
@@ -121,6 +122,7 @@ def plot_home_page_charts():
             ))
             fig.update_layout(margin=dict(t=0, b=0, l=40, r=50))
             fig.update_layout(height=450, width=400)
+            fig.update_layout(paper_bgcolor='rgba(0, 0, 0, 0)')
             gauge_dam_figures.append(fig)
 
         except Exception as e:

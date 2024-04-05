@@ -345,4 +345,4 @@ def PumpingStatistics():
     return render_template("PumpingStatistics.html")
                 
 if __name__ == '__main__':
-    app.run(host='100.25.103.95', debug=False, port=3000)
+    app.run(host='0.0.0.0', debug=False, port=3000)

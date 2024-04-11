@@ -185,6 +185,7 @@
     height: 330px;
 }
 
+
 @media (max-width: 600px) {
     .main_container .gauge_charts_container {
         width: 100%;

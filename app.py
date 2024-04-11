@@ -6,7 +6,6 @@ from models.login import LoginForm
 from models.dams import Dams, DamData
 from models.reservoirs import Reservoirs, ReservoirData
 from models.plot_functions import today_date, plot_reservoir_level_charts, plot_dam_level_charts, plot_home_page_charts
-from dash import Dash, html, dcc, callback, Input, Output, dash_table
 import pandas as pd
 import json
 import plotly
@@ -41,6 +40,10 @@ def graph():
     graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
     
     return render_template("graph.html", graph1JSON=graph1JSON)
+
+@app.route('/landing', strict_slashes=False)
+def landing():
+    return render_template("landing.html")
 
 
 @app.route('/', strict_slashes=False)
@@ -345,4 +348,4 @@ def PumpingStatistics():
     return render_template("PumpingStatistics.html")
                 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

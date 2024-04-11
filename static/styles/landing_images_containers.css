@@ -1,0 +1,23 @@
+.land_container1 {
+    height: 350px;
+    margin-top: 40px;
+    background: gray;
+}
+
+.img_container1, .img_container2 {
+    width: 700px;
+    height: 350px;
+}
+
+.img_container1 {
+    float: left;
+    margin-right: 10px;
+}
+
+.img_container2 {
+    float: right;
+    margin-left: 10px;
+}
+
+/* .paragraph_container {
+} */

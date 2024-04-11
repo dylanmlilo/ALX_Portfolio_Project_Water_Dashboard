@@ -5,7 +5,7 @@ from models.reservoirs import Reservoirs, ReservoirData
 import pandas as pd
 
 
-db_connection_string = "mysql+pymysql://root:Sherry123#@127.0.0.1/bcc_water_data?charset=utf8mb4"
+db_connection_string = "mysql+pymysql://:@/bcc_data?charset=utf8mb4"
 
 engine = create_engine(db_connection_string)
 

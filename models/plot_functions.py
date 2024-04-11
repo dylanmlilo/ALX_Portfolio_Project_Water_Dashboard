@@ -1,5 +1,4 @@
 from flask import abort
-from dash import Dash, html, dcc, callback, Input, Output, dash_table
 import pandas as pd
 import json
 import plotly
@@ -211,7 +210,7 @@ def plot_reservoir_level_charts(reservoir_name):
         }
     },
     xaxis_title_text="Date",
-    yaxis_title_text="Reservoir Level (%)",
+    yaxis_title_text="Reservoir Level",
     xaxis_title_font_size=20,
     yaxis_title_font_size=18,
     legend_title_font={'size': 18}

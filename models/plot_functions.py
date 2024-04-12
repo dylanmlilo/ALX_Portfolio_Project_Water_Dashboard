@@ -70,12 +70,22 @@ def plot_home_page_charts():
     graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
     graph2JSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
     
-    reservoir_names = session.query(Reservoirs.reservoir_name).all()
+    try:
+        reservoir_names = session.query(Reservoirs.reservoir_name).all()
+    except:
+        session.rollback()
+    finally:
+        session.close()
     reservoir_names = [name[0] for name in reservoir_names]
     
     gauge_reservoir_figures = []
     for reservoir_name in reservoir_names:
-        reservoir = session.query(Reservoirs).filter(Reservoirs.reservoir_name == reservoir_name).first()
+        try:
+            reservoir = session.query(Reservoirs).filter(Reservoirs.reservoir_name == reservoir_name).first()
+        except:
+            session.rollback()
+        finally:
+            session.close()
         try:
             current_level = current_reservoir_levels(reservoir_name)
             maximum_level = reservoir.max_level
@@ -126,8 +136,12 @@ def plot_home_page_charts():
     
     
     
-    
-    dam_names = session.query(Dams.dam_name).all()
+    try:
+        dam_names = session.query(Dams.dam_name).all()
+    except:
+        session.rollback()
+    finally:
+        session.close()
     dam_names = [name[0] for name in dam_names]
     
     gauge_dam_figures = []
@@ -183,9 +197,13 @@ def plot_home_page_charts():
     return graph1JSON, graph2JSON, gauge_reservoir_json, gauge_dam_json
     
 def plot_reservoir_level_charts(reservoir_name):
-    
-    reservoir = session.query(Reservoirs).filter(Reservoirs.reservoir_name == reservoir_name).first()
-
+    try:
+        reservoir = session.query(Reservoirs).filter(Reservoirs.reservoir_name == reservoir_name).first()
+    except:
+        session.rollback()
+    finally:
+        session.close()
+        
     if reservoir is None:
         abort(404) 
     
@@ -244,8 +262,13 @@ def plot_reservoir_level_charts(reservoir_name):
 
 
 def plot_dam_level_charts(dam_name):
-    dam = session.query(Dams).filter(Dams.dam_name == dam_name).first()
-
+    try:
+        dam = session.query(Dams).filter(Dams.dam_name == dam_name).first()
+    except:
+        session.rollback()
+    finally:
+        session.close()
+        
     if dam is None:
         abort(404)
 

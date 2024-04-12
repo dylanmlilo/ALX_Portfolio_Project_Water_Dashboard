@@ -23,7 +23,13 @@ login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(user_id):
-    return session.query(Users).get(int(user_id))
+    try:
+        user = session.query(Users).get(int(user_id))
+    except:
+        session.rollback()
+    finally:
+        session.close()
+    return user
 
 
 @app.route('/test_page', strict_slashes=False, methods=['GET', 'POST'])
@@ -61,7 +67,12 @@ def index():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = session.query(Users).filter_by(username=form.username.data).first()
+        try:
+            user = session.query(Users).filter_by(username=form.username.data).first()
+        except:
+            session.rollback()
+        finally:
+            session.close()
         if user and user.password == form.password.data:
             login_user(user)
             return redirect(url_for('admin_dashboard'))
@@ -96,9 +107,15 @@ def dam(dam_name):
         template: Rendered dam_page.html template with dam details and data.
         404: If the specified dam is not found.
     """
+    try:
+        dam = session.query(Dams).filter(Dams.dam_name == dam_name).first()
 
-    dam = session.query(Dams).filter(Dams.dam_name == dam_name).first()
-
+    except Exception as e:
+        session.rollback()
+        
+    finally:
+        session.close()
+    
     if dam is None:
         abort(404)  # Dam not found
 
@@ -160,10 +177,19 @@ def insert_dam_data():
             session.rollback()
             return jsonify({'error': str(e)}), 400
         
+        finally:
+            session.close()
+        
 @app.route('/delete_dam_data/<int:dam_data_id>', methods=['GET', 'POST'])
 @login_required
 def delete_dam_data(dam_data_id):
-    dam_data = session.query(DamData).filter_by(id=dam_data_id).first()
+    try:
+        dam_data = session.query(DamData).filter_by(id=dam_data_id).first()
+    except:
+        session.rollback()
+    finally:
+        session.close()
+        
     if dam_data:
         session.delete(dam_data)
         session.commit()
@@ -211,6 +237,9 @@ def update_dam_data(dam_data_id):
         except Exception as e:
             session.rollback()
             return jsonify({'error': str(e)}), 400
+        
+        finally:
+            session.close()
 
         
 @app.route('/reservoirs/<string:reservoir_name>', strict_slashes=False)
@@ -225,8 +254,13 @@ def reservoir(reservoir_name):
         template: Rendered reservoir_page.html template with reservoir details and data.
         404: If the specified reservoir is not found.
     """
-
-    reservoir = session.query(Reservoirs).filter(Reservoirs.reservoir_name == reservoir_name).first()
+    try:
+        reservoir = session.query(Reservoirs).filter(Reservoirs.reservoir_name == reservoir_name).first()
+    except Exception as e:
+            session.rollback()
+            return jsonify({'error': str(e)}), 400
+    finally:
+        session.close()
 
     if reservoir is None:
         abort(404)  # Reservoir not found
@@ -267,7 +301,6 @@ def insert_reservoir_data():
             reservoir_percentage = request.form.get('reservoir_percentage')
             reservoir_volume = request.form.get('reservoir_volume')
 
-            # Validation checks
             errors = []
 
             if not reservoir_volume:
@@ -294,6 +327,9 @@ def insert_reservoir_data():
         except Exception as e:
             session.rollback()
             return jsonify({'error': str(e)}), 400
+        
+        finally:
+            session.close()
         
 @app.route('/update_reservoir_data/<int:reservoir_data_id>', methods=['POST'])
 @login_required
@@ -333,6 +369,9 @@ def update_reservoir_data(reservoir_data_id):
         except Exception as e:
             session.rollback()
             return jsonify({'error': str(e)}), 400
+        
+        finally:
+            session.close()
 
 
 @app.route("/SIVvsConsumption", strict_slashes=False, methods=['GET', 'POST'])

@@ -130,7 +130,7 @@ def current_dam_percentages(dam_name):
 
 
 
-# session.commit()
-# session.rollback()
+session.commit()
+session.rollback()
 
 #dam_name="uMzingwane Dam"

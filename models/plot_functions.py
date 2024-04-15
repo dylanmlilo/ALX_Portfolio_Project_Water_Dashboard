@@ -32,15 +32,15 @@ def plot_home_page_charts():
         'x': 0.5,
         'y': 0.9,
         'font': {
-            'size': 30,
+            'size': 25,
             'family': 'Arial'
         }
     },
     xaxis_title_text="Date",
     yaxis_title_text="Dam Percentage (%)",
-    xaxis_title_font_size=20,
-    yaxis_title_font_size=18,
-    legend_title_font={'size': 18}
+    xaxis_title_font_size=16,
+    yaxis_title_font_size=16,
+    legend_title_font={'size': 16}
 )
     
     reservoir_data = reservoir_data_to_dict_list()
@@ -108,7 +108,7 @@ def plot_home_page_charts():
                 number = number_color,
                 value = current_level,
                 domain = {'x': [0, 1], 'y': [0, 1]},
-                title={'text': f"{reservoir_name} Reservoir Level", 'font': {'color': 'rgb(9, 9, 54)'}},
+                title={'text': f"{reservoir_name} Reservoir Level", 'font': {'color': 'rgb(9, 9, 54)', 'size': 18}},
                 gauge = {
                     'axis': {
                             'range': [0, maximum_level],
@@ -125,7 +125,7 @@ def plot_home_page_charts():
             ))
             
             fig.update_layout(margin=dict(t=0, b=0, l=40, r=50))
-            fig.update_layout(height=450, width=400)
+            fig.update_layout(height=400, width=310)
             fig.update_layout(paper_bgcolor='rgba(0, 0, 0, 0)')
             gauge_reservoir_figures.append(fig)
 
@@ -169,7 +169,7 @@ def plot_home_page_charts():
                 number = number_color,
                 value = current_level,
                 domain = {'x': [0, 1], 'y': [0, 1]},
-                title={'text': f"{dam_name} Percentage", 'font': {'color': 'rgb(9, 9, 54)'}},
+                title={'text': f"{dam_name} Percentage", 'font': {'color': 'rgb(9, 9, 54)', 'size': 18}},
                 gauge = {
                     'axis': {
                             'range': [0, maximum_level],
@@ -185,7 +185,7 @@ def plot_home_page_charts():
                 }
             ))
             fig.update_layout(margin=dict(t=0, b=0, l=40, r=50))
-            fig.update_layout(height=450, width=400)
+            fig.update_layout(height=400, width=310)
             fig.update_layout(paper_bgcolor='rgba(0, 0, 0, 0)')
             gauge_dam_figures.append(fig)
 

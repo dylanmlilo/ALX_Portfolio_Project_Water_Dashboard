@@ -166,14 +166,12 @@
     width: 50%;
     margin: 50px auto;
     background: rgba(47, 182, 182, 0.767);
-    padding: 5px 0 10px 0;
+    padding: 10px;
     border-radius: 60px;
     color: rgba(1, 1, 66, 0.6);
 }
 
 .main_container .sub-heading h2 {
-    margin-top: 20px;
-    font-size: x-large;
     font-size: 3rem;
 }
 
@@ -190,41 +188,59 @@
     .main_container .gauge_charts_container {
         width: 100%;
         margin: 0 auto;
-        background: none;
+        background: rgb(199, 235, 247);
     }
 
     .gauge_chart {
         height: 300px; /* Set the height for smaller screens */
         width: 50%; /* Set the width for smaller screens */
       }
+
+    .main_container .main-heading h1 {
+        font-size: 2.75rem;
+        padding-top: 30px;
+    }
+
+    .main_container .main-heading h2 {
+        font-size: 1.8rem;
+    }
+
+    .main_container .sub-heading h2 {
+        font-size: 1.5rem;
+    }
+    .main_container .sub-heading {
+        width: 70%;
+        border-radius: 50px;
+        padding: 5px;
+    }
 }
 
 @media (min-width: 601px) {
-    .main_container .gauge_charts_container {
+    /* .main_container .gauge_charts_container {
         width: 100%;
         box-shadow: -10px 0px 5px rgb(9, 9, 54);
-    }
+    } */
 }
 
 
 @media (min-width: 768px) {
-    .main_container .gauge_charts_container {
+    /* .main_container .gauge_charts_container {
         width: 100%;
         box-shadow: -10px 0px 5px rgba(0, 0, 255, 0.7);
-    }
+    } */
 }
 
 @media (min-width: 992px) {
-    .main_container .gauge_charts_container {
+    /* .main_container .gauge_charts_container {
         width: 100%;
         box-shadow: -10px 0px 5px rgba(0, 0, 255, 0.7);
-    }
+    } */
 }
 
 
 @media (min-width: 1200px) {
-    .main_container .gauge_charts_container {
+    /* .main_container .gauge_charts_container {
         width: 100%;
         box-shadow: -10px 0px 5px rgba(0, 0, 255, 0.7);
-    }
+    } */
 }

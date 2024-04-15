@@ -1,70 +1,79 @@
-{% block nav %}
-<nav class="navbar bg-body-tertiary shadow-sm fixed-top navbar-expand-sm">
-  <a class="navbar-brand" href="/">
-    <img id="logo" src="../static/images/logo_council.jpg" alt="Logo">
-    City of Bulawayo
-  </a>
-  <button class="navbar-toggler" type="button"
-          data-bs-toggle="collapse" data-bs-target="#toogleMobileMenu"
-          aria-controls="navbarNav" aria-expanded="false"
-          aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="nav-item active dropdown show">
-        <a class="nav-link dropdown-toggle" href="/dams"
-           id="navbarDropdown" role="button"
-           data-bs-toggle="dropdown" aria-expanded="ture">Detailed Dam Levels</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="/dams/Inyankuni Dam">Inyankuni Dam</a></li>
-          <li><a class="dropdown-item" href="/dams/Insiza Mayfair Dam">Insiza Mayfair Dam</a></li>
-          <li><a class="dropdown-item" href="/dams/Mtshabezi Dam">Mtshabezi Dam</a></li>
-          <li><a class="dropdown-item" href="/dams/uMzingwane Dam">uMzingwane Dam</a></li>
-          <li><a class="dropdown-item" href="/dams/Lower Ncema Dam">Lower Ncema Dam</a></li>
-          <li><a class="dropdown-item" href="/dams/Upper Ncema Dam">Upper Ncema Dam</a></li>
+{% block nav_landing %}
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <!-- <img id="logo" src="../static/images/logo_council.jpg" alt="Logo"> -->
+      City of Bulawayo
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header text-white border-bottom">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">City of Bulawayo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-center flex-grow-1 align-items-center gap-4">
+          <li class="nav-item active">
+            <a class="nav-link" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/dams" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Detailed Dam Levels
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/dams/Inyankuni Dam">Inyankuni Dam</a></li>
+              <li><a class="dropdown-item" href="/dams/Insiza Mayfair Dam">Insiza Mayfair Dam</a></li>
+              <li><a class="dropdown-item" href="/dams/Mtshabezi Dam">Mtshabezi Dam</a></li>
+              <li><a class="dropdown-item" href="/dams/uMzingwane Dam">uMzingwane Dam</a></li>
+              <li><a class="dropdown-item" href="/dams/Lower Ncema Dam">Lower Ncema Dam</a></li>
+              <li><a class="dropdown-item" href="/dams/Upper Ncema Dam">Upper Ncema Dam</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Detailed Reservoir Levels
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/reservoirs/Magwegwe">Magwegwe</a></li>
+              <li><a class="dropdown-item" href="/reservoirs/Hillside">Hillside</a></li>
+              <li><a class="dropdown-item" href="/reservoirs/Rifle Range">Rifle Range</a></li>
+              <li><a class="dropdown-item" href="/reservoirs/6J">6J</a></li>
+              <li><a class="dropdown-item" href="/reservoirs/Tuli">Tuli</a></li>
+              <li><a class="dropdown-item" href="/reservoirs/Criterion Clear">Criterion Clear</a></li>
+              <li><a class="dropdown-item" href="/reservoirs/Criterion Raw">Criterion Raw</a></li>
+            </ul>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/PumpingStatistics">Pumping Statistics</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/SIVvsConsumption">City Consumption vs SIV</a>
+          </li>
+          <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#"
+               id="navbarDropdownMore" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">More</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMore">
+              <li class="nav-item active">
+                <a class="dropdown-item" href="/ChemicalStockLevels">Chemical Stock Levels</a>
+              </li>
+              <li><a class="dropdown-item" href="/admin_dashboard">Admin Dashboard</a></li>
+              {% if current_user.is_authenticated %}
+                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+              {% else %}
+                <li><a class="dropdown-item" href="/login">Login</a></li>
+              {% endif %}
+            </ul>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Search</a>
+            </li>
+          </li>
         </ul>
-      </li>
-      <li class="nav-item active dropdown">
-        <a class="nav-link dropdown-toggle" href="#"
-           id="navbarDropdown" role="button"
-           data-bs-toggle="dropdown" aria-expanded="false">Detailed Reservoir Levels</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="/reservoirs/Magwegwe">Magwegwe</a></li>
-          <li><a class="dropdown-item" href="/reservoirs/Hillside">Hillside</a></li>
-          <li><a class="dropdown-item" href="/reservoirs/Rifle Range">Rifle Range</a></li>
-          <li><a class="dropdown-item" href="/reservoirs/6J">6J</a></li>
-          <li><a class="dropdown-item" href="/reservoirs/Tuli">Tuli</a></li>
-          <li><a class="dropdown-item" href="/reservoirs/Criterion Clear">Criterion Clear</a></li>
-          <li><a class="dropdown-item" href="/reservoirs/Criterion Raw">Criterion Raw</a></li>
-        </ul>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/SIVvsConsumption">City Consumption vs SIV</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/ChemicalStockLevels">Chemical Stock Levels</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/PumpingStatistics">Pumping Statistics</a>
-      </li>
-      <li class="nav-item active dropdown">
-        <a class="nav-link dropdown-toggle" href="#"
-           id="navbarDropdownMore" role="button"
-           data-bs-toggle="dropdown" aria-expanded="false">More</a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMore">
-          <li><a class="dropdown-item" href="/admin_dashboard">Admin Dashboard</a></li>
-          {% if current_user.is_authenticated %}
-            <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
-          {% else %}
-            <li><a class="dropdown-item" href="/login">Login</a></li>
-          {% endif %}
-        </ul>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </nav>
 

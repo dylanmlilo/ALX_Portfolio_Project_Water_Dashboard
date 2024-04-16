@@ -28,7 +28,6 @@ def plot_home_page_charts():
     fig1.update_layout(
     legend_title_text='Dams',
     title={
-        'text': "Dam Percentages Levels",
         'x': 0.5,
         'y': 0.9,
         'font': {
@@ -38,8 +37,8 @@ def plot_home_page_charts():
     },
     xaxis_title_text="Date",
     yaxis_title_text="Dam Percentage (%)",
-    xaxis_title_font_size=16,
-    yaxis_title_font_size=16,
+    xaxis_title_font_size=17,
+    yaxis_title_font_size=17,
     legend_title_font={'size': 16}
 )
     
@@ -56,13 +55,13 @@ def plot_home_page_charts():
         'x': 0.5,
         'y': 0.9,
         'font': {
-            'size': 30,
+            'size': 25,
             'family': 'Arial'
         }
     },
     xaxis_title_text="Date",
     yaxis_title_text="Reservoir Level (ft), Crit clear and raw (m)",
-    xaxis_title_font_size=20,
+    xaxis_title_font_size=17,
     yaxis_title_font_size=18,
     legend_title_font={'size': 18}
 )
@@ -223,13 +222,13 @@ def plot_reservoir_level_charts(reservoir_name):
         'x': 0.5,
         'y': 0.9,
         'font': {
-            'size': 30,
+            'size': 22,
             'family': 'Arial'
         }
     },
     xaxis_title_text="Date",
     yaxis_title_text="Reservoir Level",
-    xaxis_title_font_size=20,
+    xaxis_title_font_size=18,
     yaxis_title_font_size=18,
     legend_title_font={'size': 18}
 )
@@ -246,13 +245,13 @@ def plot_reservoir_level_charts(reservoir_name):
         'x': 0.5,
         'y': 0.9,
         'font': {
-            'size': 30,
+            'size': 22,
             'family': 'Arial'
         }
     },
     xaxis_title_text="Date",
     yaxis_title_text="Reservoir Volume",
-    xaxis_title_font_size=20,
+    xaxis_title_font_size=18,
     yaxis_title_font_size=18,
     legend_title_font={'size': 18}
 )
@@ -289,13 +288,13 @@ def plot_dam_level_charts(dam_name):
         'x': 0.5,
         'y': 0.9,
         'font': {
-            'size': 30,
+            'size': 22,
             'family': 'Arial'
         }
     },
     xaxis_title_text="Date",
     yaxis_title_text="Dam Percentage (%)",
-    xaxis_title_font_size=20,
+    xaxis_title_font_size=18,
     yaxis_title_font_size=18,
     legend_title_font={'size': 18}
 )
@@ -314,13 +313,13 @@ def plot_dam_level_charts(dam_name):
         'x': 0.5,
         'y': 0.9,
         'font': {
-            'size': 30,
+            'size': 22,
             'family': 'Arial'
         }
     },
     xaxis_title_text="Date",
     yaxis_title_text="Dam Reading",
-    xaxis_title_font_size=20,
+    xaxis_title_font_size=18,
     yaxis_title_font_size=18,
     legend_title_font={'size': 18}
 )
@@ -335,13 +334,13 @@ def plot_dam_level_charts(dam_name):
         'x': 0.5,
         'y': 0.9,
         'font': {
-            'size': 30,
+            'size': 22,
             'family': 'Arial'
         }
     },
     xaxis_title_text="Date",
     yaxis_title_text="Dam Volumes",
-    xaxis_title_font_size=20,
+    xaxis_title_font_size=18,
     yaxis_title_font_size=18,
     legend_title_font={'size': 18}
 )

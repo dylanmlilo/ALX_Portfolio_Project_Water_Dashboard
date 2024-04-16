@@ -6,32 +6,28 @@
 nav .navbar-brand #logo {
     width: 36px;
     height: 45px;
-    margin: 10px;
+    margin: 0 8px;
+} 
+
+.offcanvas-body .dropdown .dropdown-menu {
+    background: rgb(199, 235, 247);
+    width: 200px;
 }
 
-.navbarNav .navbar-nav .nav-item .nav-link {
-    margin: 0px 3px 5px 3px;
-}
-
-.navbarNav .navbar-nav .nav-item .btn {
-  margin: 0px 0px 0px 4px; 
-}
-
-
-.search_bar {
-    margin-right: 10px;
-    margin-top: 10px;
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-.nav-link {
+#offcanvasNavbar .offcanvas-body .navbar-nav .nav-item .nav-link {
+    font-size: 1.05rem;
+    color: rgba(2, 31, 51, 0.9);
     transition: all 0.3s;
 }
 
-.nav-link:hover {
-    /* text-decoration: underline; */
-    border-bottom: 1px solid blue;
-} 
+#offcanvasNavbar .offcanvas-body .navbar-nav .nav-item .nav-link:hover {
+    color: #72a7b4;
+}
+
+
+.sidebar .offcanvas-header .logo {
+    width: 36px;
+    height: 45px;
+    margin-right: 70px;
+}
+

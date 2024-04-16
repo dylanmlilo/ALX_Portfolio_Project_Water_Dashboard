@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <!-- <img id="logo" src="../static/images/logo_council.jpg" alt="Logo"> -->
+      <img id="logo" src="../static/images/logo_council.jpg" alt="Logo">
       City of Bulawayo
     </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -11,11 +11,12 @@
     </button>
     <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header text-white border-bottom">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">City of Bulawayo</h5>
+        <img class="logo" src="../static/images/logo_council.jpg" alt="Logo">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: black;">City of Bulawayo</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-center flex-grow-1 align-items-center gap-4">
+        <ul class="navbar-nav justify-content-end flex-grow-1 align-items-center gap-4">
           <li class="nav-item active">
             <a class="nav-link" aria-current="page" href="/">Home</a>
           </li>
@@ -46,12 +47,6 @@
               <li><a class="dropdown-item" href="/reservoirs/Criterion Raw">Criterion Raw</a></li>
             </ul>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/PumpingStatistics">Pumping Statistics</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/SIVvsConsumption">City Consumption vs SIV</a>
-          </li>
           <li class="nav-item active dropdown">
             <a class="nav-link dropdown-toggle" href="#"
                id="navbarDropdownMore" role="button"
@@ -59,6 +54,12 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMore">
               <li class="nav-item active">
                 <a class="dropdown-item" href="/ChemicalStockLevels">Chemical Stock Levels</a>
+              </li>
+              <li class="nav-item active">
+                <a class="dropdown-item" href="/PumpingStatistics">Pumping Statistics</a>
+              </li>
+              <li class="nav-item active">
+                <a class="dropdown-item" href="/SIVvsConsumption">City Consumption vs SIV</a>
               </li>
               <li><a class="dropdown-item" href="/admin_dashboard">Admin Dashboard</a></li>
               {% if current_user.is_authenticated %}
@@ -68,7 +69,7 @@
               {% endif %}
             </ul>
             <li class="nav-item active">
-              <a class="nav-link" href="#">Search</a>
+              <a class="nav-link" href="#">Search Button</a>
             </li>
           </li>
         </ul>

@@ -34,11 +34,29 @@
 </div>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
-   var dam_graph1 = {{ dam_graph1JSON|safe}}
-   Plotly.plot('graph1', dam_graph1, {responsive: true});
-   var dam_graph2 = {{ dam_graph2JSON|safe}}
-   Plotly.plot('graph2', dam_graph2, {responsive: true});
-   var dam_graph3 = {{ dam_graph3JSON|safe}}
-   Plotly.plot('graph3', dam_graph3, {responsive: true});
-</script>
+    var dam_graph1 = {{ dam_graph1JSON|safe}}
+    Plotly.plot('graph1', dam_graph1, {responsive: true});
+    var dam_graph2 = {{ dam_graph2JSON|safe}}
+    Plotly.plot('graph2', dam_graph2, {responsive: true});
+    var dam_graph3 = {{ dam_graph3JSON|safe}}
+    Plotly.plot('graph3', dam_graph3, {responsive: true});
+  
+    function updateChartSize() {
+      const graphContainers = document.querySelectorAll('.graph-container');
+  
+      for (const container of graphContainers) {
+        const chartId = container.id; // Get the chart container ID
+        const chart = document.getElementById(chartId); // Find the chart element
+        
+        // Set chart width to occupy full width of the container
+        const containerWidth = container.clientWidth;
+        Plotly.relayout(chart, { width: containerWidth });
+      }
+    }
+  
+    // Initial call to set correct width on page load
+    updateChartSize();
+  
+    window.addEventListener('resize', updateChartSize);
+  </script>
 {% endblock%}

@@ -34,9 +34,27 @@
 </div>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
-   var res_graph1 = {{ level_graphJSON|safe}}
-   Plotly.plot('res_graph1', res_graph1, {responsive: true});
-   var res_graph2 = {{ volume_graphJSON|safe}}
-   Plotly.plot('res_graph2', res_graph2, {responsive: true});
+    var res_graph1 = {{ level_graphJSON|safe}}
+    Plotly.plot('res_graph1', res_graph1, {responsive: true});
+    var res_graph2 = {{ volume_graphJSON|safe}}
+    Plotly.plot('res_graph2', res_graph2, {responsive: true});
+  
+    function updateChartSize() {
+      const graphContainers = document.querySelectorAll('.graph-container');
+  
+      for (const container of graphContainers) {
+        const chartId = container.id; // Get the chart container ID
+        const chart = document.getElementById(chartId); // Find the chart element
+        
+        // Set chart width to occupy full width of the container
+        const containerWidth = container.clientWidth;
+        Plotly.relayout(chart, { width: containerWidth });
+      }
+    }
+  
+    // Initial call to set correct width on page load
+    updateChartSize();
+  
+    window.addEventListener('resize', updateChartSize);
 </script>
 {% endblock%}

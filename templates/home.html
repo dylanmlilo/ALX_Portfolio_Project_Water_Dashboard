@@ -33,10 +33,10 @@
 <script>
         // Load area plots
         var graph1Data = {{ graph1JSON | safe }};
-        Plotly.newPlot('graph-container1', graph1Data);
+        Plotly.newPlot('graph-container1', graph1Data, { responsive: true });
 
         var graph2Data = {{ graph2JSON | safe }};
-        Plotly.newPlot('graph-container2', graph2Data);
+        Plotly.newPlot('graph-container2', graph2Data, { responsive: true });
 
         // Load gauge_reservoir charts
         var gaugeReservoirData = {{ gauge_reservoir_json | safe }};
@@ -52,5 +52,23 @@
             var div = document.getElementById(divId);
             Plotly.newPlot(div, JSON.parse(data));
         });
+
+      function updateChartSize() {
+        const graphContainers = document.querySelectorAll('.graph-container');
+  
+        for (const container of graphContainers) {
+          const chartId = container.id; // Get the chart container ID
+          const chart = document.getElementById(chartId); // Find the chart element
+        
+          // Set chart width to occupy full width of the container
+          const containerWidth = container.clientWidth;
+          Plotly.relayout(chart, { width: containerWidth });
+        }
+    }
+  
+    // Initial call to set correct width on page load
+    updateChartSize();
+  
+    window.addEventListener('resize', updateChartSize);
 </script>
 {% endblock %}

@@ -1,11 +1,14 @@
-from sqlalchemy.orm import sessionmaker, declarative_base
+import pandas as pd
+import os
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from models.dams import Dams, DamData
 from models.reservoirs import Reservoirs, ReservoirData
-import pandas as pd
+from dotenv import load_dotenv
 
+load_dotenv()
 
-db_connection_string = "mysql+pymysql://holberton_user:projectcorrection280hbtn@100.25.103.95/bcc_data?charset=utf8mb4"
+db_connection_string = os.getenv("db_connection_string")
 
 engine = create_engine(db_connection_string)
 

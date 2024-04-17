@@ -12,19 +12,19 @@
   </div>
   <div class="date"><h2>{{ date }}</h2></div>
   <div class="sub-heading"><h2>Today's Reservoir Levels</h2></div>
-  <div class="row gauge_charts_container">
+  <div class="gauge_charts_container reservoirs_gauge_charts">
       <!-- Loop through gauge_json and create divs for each gauge_reservoir chart -->
       {% for gauge_data in gauge_reservoir_json %}
-      <div id="gauge_reservoir{{ loop.index }}" class="gauge_chart col-md-4 
+      <div id="gauge_reservoir{{ loop.index }}" class="gauge_chart 
       {% if loop.index == 7 %} center-chart {% endif %}">
       </div>
       {% endfor %}
   </div>
   <div id="graph-container2" class="graph-container"></div>
   <div class="sub-heading"><h2>Today's Dam Percentages</h2></div>
-  <div class="row gauge_charts_container">
+  <div class="gauge_charts_container dams_gauge_charts">
       {% for gauge_data in gauge_dam_json %}
-      <div id="gauge_dam{{ loop.index }}" class="gauge_chart col-md-4"></div>
+      <div id="gauge_dam{{ loop.index }}" class="gauge_chart"></div>
       {% endfor %}
   </div>
   </div>

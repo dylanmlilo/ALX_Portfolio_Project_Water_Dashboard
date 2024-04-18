@@ -11,18 +11,32 @@ import json
 import plotly
 import plotly_express as px
 import plotly.graph_objects as go
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 app = Flask(__name__)
-app.secret_key = 'Sherry123#'
+app.secret_key = os.getenv("SECRET_KEY")
 
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+
 @login_manager.user_loader
 def load_user(user_id):
+    """
+    Loads a user object from the database based on the user ID.
+
+    Args:
+        user_id (int): The ID of the user.
+
+    Returns:
+        Users or None: The user object if found, None otherwise.
+    """
     try:
         user = session.query(Users).get(int(user_id))
     except:
@@ -33,11 +47,23 @@ def load_user(user_id):
 
 @app.route('/landing', strict_slashes=False)
 def landing():
+    """
+    Renders the landing page template.
+
+    Returns:
+        flask.Response: The rendered landing page template.
+    """
     return render_template("landing.html")
 
 
 @app.route('/', strict_slashes=False)
 def index():
+    """
+    Renders the home page template with the necessary data and charts.
+
+    Returns:
+        flask.Response: The rendered home page template.
+    """
     graph1JSON, graph2JSON, gauge_reservoir_json, gauge_dam_json = plot_home_page_charts()
     
     date = today_date()
@@ -49,6 +75,12 @@ def index():
 
 @app.route('/login', strict_slashes=False, methods=['GET', 'POST'])
 def login():
+    """
+    Renders the login page template and handles user login.
+
+    Returns:
+        flask.Response: The rendered login page template or a redirect to the admin dashboard.
+    """
     form = LoginForm()
     if form.validate_on_submit():
         try:
@@ -66,17 +98,35 @@ def login():
 
 @app.route('/logout', strict_slashes=False)
 def logout():
+    """
+    Logs out the current user and redirects to the login page.
+
+    Returns:
+        flask.Response: A redirect response to the login page.
+    """
     logout_user()
     return redirect(url_for('login'))
 
 @app.route("/admin_dashboard", strict_slashes=False)
 @login_required
 def admin_dashboard():
+    """
+    Renders the admin dashboard page.
+
+    Returns:
+        flask.Response: The rendered admin dashboard template.
+    """
     return render_template("admin_dashboard.html")
         
 
 @app.route('/dams', strict_slashes=False)
 def dams():
+    """
+    Renders the dams page template.
+
+    Returns:
+        flask.Response: The rendered dams page template.
+    """
     return render_template('dams_page.html')
 
 @app.route('/dams/<string:dam_name>', strict_slashes=False)
@@ -122,12 +172,24 @@ def dam(dam_name):
 @app.route('/dam_data', strict_slashes=False, methods=['GET', 'POST'])
 @login_required
 def dam_data():
+    """
+    Renders the dam data page template with the data for all dams.
+
+    Returns:
+        flask.Response: The rendered dam data page template.
+    """
     dam_data = dams_data_to_dict_list()
     return render_template('dam_data.html', dam_data_list=dam_data)
 
 
 @app.route('/insert_dam_data', methods=['POST'])
 def insert_dam_data():
+    """
+    Inserts the dam data into the database and redirects to the dam data page.
+
+    Returns:
+        flask.Response: A redirect response to the dam data page or a JSON response with an error message.
+    """
     if request.method == 'POST':
         try:
             dam_id = request.form.get('dam_id')
@@ -167,6 +229,15 @@ def insert_dam_data():
 @app.route('/delete_dam_data/<int:dam_data_id>', methods=['GET', 'POST'])
 @login_required
 def delete_dam_data(dam_data_id):
+    """
+    Deletes a specific dam data entry from the database and redirects to the dam data page.
+
+    Args:
+        dam_data_id (int): The ID of the dam data entry to be deleted.
+
+    Returns:
+        flask.Response: A redirect response to the dam data page or a JSON response if the data is not found.
+    """
     try:
         dam_data = session.query(DamData).filter_by(id=dam_data_id).first()
     except:
@@ -185,6 +256,17 @@ def delete_dam_data(dam_data_id):
 @app.route('/update_dam_data/<int:dam_data_id>', methods=['POST'])
 @login_required
 def update_dam_data(dam_data_id):
+    """
+    Updates the dam data entry in the database with the provided data and
+    redirects to the dam data page.
+
+    Args:
+        dam_data_id (int): The ID of the dam data entry to be updated.
+
+    Returns:
+        flask.Response: A redirect response to the dam data page or
+        a JSON response with an error message.
+    """
     if request.method == 'POST':
         try:
             daily_inflow = None
@@ -271,12 +353,26 @@ def reservoir(reservoir_name):
 @app.route('/reservoir_data', strict_slashes=False, methods=['GET', 'POST'])
 @login_required
 def reservoir_data():
+    """
+    Renders the reservoir data page with the reservoir data list.
+
+    Returns:
+        flask.Response: The rendered HTML template with the reservoir data list.
+    """
     reservoir_data = reservoir_data_to_dict_list()
     return render_template('reservoir_data.html', reservoir_data_list=reservoir_data)
 
 
 @app.route('/insert_reservoir_data', methods=['POST'])
 def insert_reservoir_data():
+    """
+    Inserts a new reservoir data record into the database based on
+    the form input and redirects to the reservoir data page.
+
+    Returns:
+        flask.Response: A redirect response to the reservoir data page or
+        a JSON response with an error message.
+    """
     if request.method == 'POST':
         try:
             reservoir_id = request.form.get('reservoir_id')
@@ -318,6 +414,17 @@ def insert_reservoir_data():
 @app.route('/update_reservoir_data/<int:reservoir_data_id>', methods=['POST'])
 @login_required
 def update_reservoir_data(reservoir_data_id):
+    """
+    Updates the reservoir data entry in the database with the provided
+    data and redirects to the reservoir data page.
+
+    Args:
+        reservoir_data_id (int): The ID of the reservoir data entry to be updated.
+
+    Returns:
+        flask.Response: A redirect response to the reservoir data page or
+        a JSON response with an error message.
+    """
     if request.method == 'POST':
         try:
             reservoir_volume = None
@@ -360,15 +467,34 @@ def update_reservoir_data(reservoir_data_id):
 
 @app.route("/SIVvsConsumption", strict_slashes=False, methods=['GET', 'POST'])
 def SIVvsConsumption():
+    """
+    Renders the SIVvsConsumption.html template.
+
+    Returns:
+        flask.Response: The rendered HTML template.
+    """
     return render_template("SIVvsConsumption.html")
 
 @app.route("/ChemicalStockLevels", strict_slashes=False)
 def ChemicalStockLevels():
+    """
+    Renders the ChemicalStockLevels.html template.
+
+    Returns:
+        flask.Response: The rendered HTML template.
+    """
     return render_template("ChemicalStockLevels.html")
 
 @app.route("/PumpingStatistics", strict_slashes=False)
 def PumpingStatistics():
+    """
+    Renders the PumpingStatistics.html template.
+
+    Returns:
+        flask.Response: The rendered HTML template.
+    """
     return render_template("PumpingStatistics.html")
-                
+
+               
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

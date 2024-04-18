@@ -7,7 +7,17 @@ Base = declarative_base()
 
 
 class Users(Base, UserMixin):
+    """
+    Represents a table for users with the following columns:
+    - id (Integer): The primary key of the user.
+    - name (String): The name of the user.
+    - username (String): The username of the user (unique).
+    - password (String): The password of the user.
+    - email (String): The email of the user (unique).
+    """
+    
     __tablename__ = 'users'
+    
     id = Column(Integer, primary_key=True)
     name = Column(String(50))
     username = Column(String(50), unique=True)
@@ -17,16 +27,3 @@ class Users(Base, UserMixin):
     def __repr__(self):
         return "<Users(name='%s', username='%s', password='%s', email='%s')>" % (self.name, self.username, self.password, self.email)
 
-
-# # Create a new user object
-# new_user = Users(name="Don", username="Nkomo", password="Sherry123#", email="donNkomo11@gmail.com")
-
-# # Add the user to the session
-# session.add(new_user)
-
-# # Commit changes to the database
-# session.commit()
-
-# session.close()  # Close the session (optional but recommended)
-
-# print("New user created successfully!")

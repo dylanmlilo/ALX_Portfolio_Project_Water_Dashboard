@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+
+{% block nav %}
+  {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container stats_data_container">
+    <div class="row">
+        <div class="col md-12">
+            <div class="jumbotron stats_container p-3">
+                <h2 class="left-aligned-text"> Reservoirs Data 
+                    <a href="/admin_dashboard" class="btn btn-secondary back-btn float-right">Back</a>
+                    <button type="button" class="btn btn-success float-right"
+                    data-toggle="modal" data-target="#myReservoirModal"> Add New Data </button>
+                </h2>
+
+                <table class="table table-hover table-bordered">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Reservoir Name</th>
+                        <th>Date</th>
+                        <th>Reservoir Level</th>
+                        <th>Reservoir Percentage</th>
+                        <th>Reservoir Volume</th>
+                        <th>Action</th>
+                    </tr>
+
+                    </div>
+
+                    {% for reservoir_data in reservoir_data_list %}
+                    <tr class="{% if loop.index % 2 == 0 %}table-active{% else %}{% endif %}">
+                        <td> {{ reservoir_data.id }} </td>
+                        <td> {{ reservoir_data.reservoir_name }} </td>
+                        <td> {{ reservoir_data.date }} </td>
+                        <td> {{ reservoir_data.reservoir_level }} </td>
+                        <td> {{ reservoir_data.reservoir_percentage }}</td>
+                        <td> {{ reservoir_data.reservoir_volume }} </td>
+
+                        <td> 
+                            <a href="/delete_reservoir_data/{{ reservoir_data.id }}" class="btn btn-danger btn-xs"
+                            onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                            <a href="/update_reservoir_data/{{ reservoir_data.id }}" class="btn btn-warning btn-xs update-btn"
+                            data-toggle="modal" data-target="#updateReservoirModal{{ reservoir_data.id }}">Edit</a>
+                            
+                        </td>
+                    </tr>
+
+                    {% include "add_reservoir_modal.html" %}
+                    {% include "update_reservoir_modal.html" %}
+                    {% endfor %}
+
+                </table>
+                <a href="/admin_dashboard" class="btn btn-secondary back-btn float-right">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

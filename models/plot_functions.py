@@ -12,6 +12,12 @@ from datetime import datetime, timedelta
 
 
 def today_date():
+    """
+    Get the current date and format it as a string in the format 'Day, DD Month YYYY'.
+
+    Returns:
+        str: The formatted current date string.
+    """
     today_date = datetime.today()
 
     formatted_date = today_date.strftime('%a, %d %B %Y')
@@ -19,6 +25,16 @@ def today_date():
     return formatted_date
 
 def plot_home_page_charts():
+    """
+    Generates and returns JSON representations of various plots including dam percentages,
+    reservoir levels, and gauge figures for reservoirs and dams.
+    
+    Returns:
+    graph1JSON (str): JSON representation of the dam percentages plot.
+    graph2JSON (str): JSON representation of the reservoir levels plot.
+    gauge_reservoir_json (list of str): List of JSON representations of gauge figures for reservoirs.
+    gauge_dam_json (list of str): List of JSON representations of gauge figures for dams.
+    """
     dam_data = dams_data_to_dict_list()
     df = pd.DataFrame(dam_data)
     fig1 = px.area(df, x = 'date', y = 'dam_percentage', color='dam_name',
@@ -196,6 +212,17 @@ def plot_home_page_charts():
     return graph1JSON, graph2JSON, gauge_reservoir_json, gauge_dam_json
     
 def plot_reservoir_level_charts(reservoir_name):
+    """
+    Generates interactive area charts for reservoir level and
+    volume based on the given reservoir_name.
+    
+    Parameters:
+    reservoir_name (str): The name of the reservoir to plot charts for.
+    
+    Returns:
+    tuple: A tuple containing JSON strings for the interactive area chart
+    of reservoir level and volume.
+    """
     try:
         reservoir = session.query(Reservoirs).filter(Reservoirs.reservoir_name == reservoir_name).first()
     except:
@@ -261,6 +288,17 @@ def plot_reservoir_level_charts(reservoir_name):
 
 
 def plot_dam_level_charts(dam_name):
+    """
+    Generate interactive area charts for dam percentage, reading,
+    and volume based on the given dam_name.
+    
+    Parameters:
+    dam_name (str): The name of the dam to plot charts for.
+    
+    Returns:
+    tuple: A tuple containing JSON strings for the interactive area charts
+    of dam percentage, reading, and volume.
+    """
     try:
         dam = session.query(Dams).filter(Dams.dam_name == dam_name).first()
     except:
@@ -274,12 +312,11 @@ def plot_dam_level_charts(dam_name):
     dam_data = dams_data_to_dict_list(dam_id=dam.id)
     df = pd.DataFrame(dam_data)
     
-    # Get the real value from the database when data is made available
     critical_dam_percentage = 40
     dam_fig1 = px.area(df, x = 'date', y = 'dam_percentage',
                        labels={'x' : 'Date', 'y' : ' Dam Percentage'}, 
                        title = f"{dam.dam_name} Percentages")
-    # Add a horizontal line for the critical_dam_percentage
+    
     dam_fig1.add_hline(y=critical_dam_percentage, line_dash="solid",
                    line_color="red", annotation_text="Critical Dam Percentage")
     dam_fig1.update_traces(mode='lines+markers', marker_size=8, line_shape='spline')
@@ -304,10 +341,6 @@ def plot_dam_level_charts(dam_name):
                        labels={'x' : 'Date', 'y' : ' Dam Reading'},
                        title = f"{dam.dam_name} Readings")
     dam_fig2.update_traces(mode='lines+markers', marker_size=8, line_shape='spline')
-    # y_min = float(df['dam_reading'].min())
-    # y_max = float(df['dam_volume'].max())
-    # y_range = [y_min, y_max * 1.5]
-    # dam_fig2.update_yaxes(range=y_range)
     dam_fig2.update_layout(
     title={
         'x': 0.5,

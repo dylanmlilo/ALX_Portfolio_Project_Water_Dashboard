@@ -10,6 +10,7 @@ load_dotenv()
 
 db_connection_string = os.getenv("db_connection_string")
 
+
 engine = create_engine(db_connection_string)
 
 Session = sessionmaker(bind=engine)

@@ -61,11 +61,17 @@
               <li class="nav-item active">
                 <a class="dropdown-item" href="/SIVvsConsumption">City Consumption vs SIV</a>
               </li>
-              <li><a class="dropdown-item" href="/admin_dashboard">Admin Dashboard</a></li>
+              <li class="nav-item active">
+                <a class="dropdown-item" href="/admin_dashboard">Admin Dashboard</a>
+              </li>
               {% if current_user.is_authenticated %}
-                <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                <li class="nav-item active">
+                  <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                </li>
               {% else %}
-                <li><a class="dropdown-item" href="/login">Login</a></li>
+                <li class="nav-item active">
+                  <a class="dropdown-item" href="/login">Login</a>
+                </li>
               {% endif %}
             </ul>
             <li class="nav-item active">

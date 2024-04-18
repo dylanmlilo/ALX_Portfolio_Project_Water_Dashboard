@@ -1,12 +1,30 @@
-.land_container1 {
-    height: 350px;
-    margin-top: 40px;
-    background: gray;
+.landing_header {
+    background: rgb(199, 235, 247);
 }
 
-.img_container1, .img_container2 {
-    width: 700px;
-    height: 350px;
+.landing_header h1 {
+    padding: 5px;
+}
+
+.land_container1 {
+    height: 335px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background: rgb(199, 235, 247);
+}
+
+.land_container2 {
+    height: 370px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background: rgb(199, 235, 247);
+}
+
+.land_container3 {
+    height: 435px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background: rgb(199, 235, 247);
 }
 
 .img_container1 {
@@ -19,5 +37,6 @@
     margin-left: 10px;
 }
 
-/* .paragraph_container {
-} */
+.paragraph_container {
+    padding: 5px;
+}

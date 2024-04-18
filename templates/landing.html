@@ -6,65 +6,99 @@
 
 
 {% block content %}
-  <h1>This is the landing page</h1>
+<div class="landing_header">
+  <h1>Water Management Dashboard</h1>
+</div>
   <div class="land_container1">
     <img class="img_container1" src="../static/images/homepage1.png" alt=""/>
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">This is the homepage of the water management dashboard. 
+      It allows users to navigate to diffrent pages of the dashboard. 
+      The page contains the daily charts which display the critical statistics for all the dam and reservoirs.</p>
   </div>
-  <div class="land_container1">
+  <div class="land_container2">
     <img class="img_container2" src="../static/images/homepage2.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">These gauge charts display the daily reservoir levels. 
+      The maximum reservoir level is shown in lightblue with the critical reservoir level highlighted in red. 
+      The gauge and the number represent the reservoir level at the specified date. 
+      If the level fall below the critical reservoir level the number changes its colour to red. 
+      These gauge charts are responsive to all screens sizes.
+    </p>
   </div>
-  <div class="land_container1">
+  <div class="land_container3">
     <img class="img_container1" src="../static/images/homepage3.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">This chart displays how the reservoir level is changing over time. 
+      The reservoir level is red in ft except for the criterion reservoirs whose levels are in metres.
+      This chart is interactive which enhances the user experience. It allows users to zoom in and out, select the specific reservoir to view its data,
+      select the range of data to view and use pan properties. You can also take a picture of the chart and reset the chart. 
+      This plotly chart is also responsive to all screen sizes. 
+      <p>
   </div>
-  <div class="land_container1">
+  <div class="land_container3">
     <img class="img_container2" src="../static/images/homepage4.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">
+      These gauge charts display the daily dam percentages. 
+      The maximum dam percentages is shown in lightblue with the critical dam percentages highlighted in red. 
+      The gauge and the number represent the dam percentage at the specified date. 
+      If the level fall below the critical dam percentage the number changes its colour to red. 
+      These gauge charts are responsive to all screens sizes.
+    </p>
   </div>
-  <div class="land_container1">
+  <div class="land_container2">
     <img class="img_container1" src="../static/images/homepage5.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">This page displays data for a specific dam that can be selected within the detailed dam levels tab in the navigation bar. 
+      It allows the users to get a glimce of the history of the dam and the critical dam parameters that include its volume, 
+      capacity and critical volume. Users are also able to see its daily percentage which changes from blue to red when it falls below the critical percentage.
+    </p>
   </div>
   <div class="land_container1">
     <img class="img_container2" src="../static/images/reservoirpage1.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">Similar to the dam page this page displays data for a specific reservoir that can be selected within the detailed reservoir levels tab in the navigation bar. 
+      It allows the users to get a glimce of the history of the reservoir and the critical reservoir parameters that include its volume, 
+      capacity and critical volume.</p>
   </div>
   <div class="land_container1">
     <img class="img_container1" src="../static/images/damepage2.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container"> This section allows users to see the daily dam percentage which changes from blue to red when its percentage falls below the dam's critical percentage.</p>
   </div>
   <div class="land_container1">
     <img class="img_container2" src="../static/images/damepage3.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">This chart displays how the dam's percentage changes over time. 
+      It is responsive and interactive allowing users to zoom and select the specific range of dates of their interest</p>
   </div>
   <div class="land_container1">
     <img class="img_container1" src="../static/images/reservoirpage2.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">Similarly to the dams charts, this chart displays how the reservoir's level changes over time. 
+      It is responsive and interactive allowing users to zoom and select the specific range of dates of their interest</p>
   </div>
   <div class="land_container1">
     <img class="img_container2" src="../static/images/reservoirpage3.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">From the more tab in the navigation bar, users can login and access the admiistrator's dashboard</p>
   </div>
   <div class="land_container1">
     <img class="img_container1" src="../static/images/loginpage.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">This is the login page which allows users to input thier credentials in order to login as adninistrators. 
+      If the details are correct the user is logged in, If they are not correct the user is denied access to the administrator's page which contains critical information  </p>
   </div>
   <div class="land_container1">
     <img class="img_container2" src="../static/images/admindashboard.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">When the user inputs the correct details they are logged in and given access to the administratr's dashboard. 
+      This page allows administrators to selecte a the specific data that they want to manage.
+    </p>
   </div>
   <div class="land_container1">
     <img class="img_container1" src="../static/images/damsDatapage.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">This page reads the database and displays the data for specific dams in a table. 
+      It allows admins to perfom CRUD (create, read, update, delete) operations on the data that is stored in the mysql database. 
+    </p>
   </div>
   <div class="land_container1">
     <img class="img_container2" src="../static/images/reservoirdatapage.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">Similarly to the dams data page, this page also reads the database and displays the data for specific reeservoir in a table. 
+      It also allows admins to perfom CRUD (create, read, update, delete) operations on the data that is stored in the mysql database.</p>
   </div>
   <div class="land_container1">
     <img class="img_container1" src="../static/images/logout.png" alt="">
-    <p class="paragraph_container">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem quam officiis voluptate voluptas suscipit ex laboriosam mollitia porro, impedit totam voluptatem obcaecati placeat. Ipsum aperiam quo, laudantium optio ea praesentium nisi beatae repudiandae. Autem natus culpa non at! Ex sapiente nesciunt ducimus rem aut ipsum optio accusamus ad sint quos.</p>
+    <p class="paragraph_container">The data pages contain sensitive data hence the reason they require user to be logged in. 
+      Once logged in the admins are required to logout after managing the data. </p>
   </div>
 {% endblock %}

@@ -252,6 +252,11 @@
         backdrop-filter: blur(40px);
         text-shadow: 1px 1px 0px rgba(217, 217, 250, 0.74);
     }
+
+    .img_container1, .img_container2 {
+        width: 65%;
+        height: 50%;
+    }
 }
 
 
@@ -298,6 +303,11 @@
         text-shadow: 1px 1px 0px rgba(217, 217, 250, 0.74);
     }
 
+    .img_container1, .img_container2 {
+        width: 65%;
+        height: 60%;
+    }
+
 }
 
 @media (min-width: 611px) and (max-width: 991px) {
@@ -340,6 +350,12 @@
         backdrop-filter: blur(40px);
         text-shadow: 1px 1px 0px rgba(217, 217, 250, 0.74);
     }
+
+    .img_container1, .img_container2 {
+        width: 65%;
+        height: 80%;
+    }
+
 }
 
 @media (min-width: 992px) {
@@ -359,5 +375,10 @@
     .gauge_charts_container.reservoirs_gauge_charts > *:last-child {
         grid-column-end: span 3;
         justify-self: center;
+    }
+
+    .img_container1, .img_container2 {
+        width: 70%;
+        height: 100%;
     }
 }

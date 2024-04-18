@@ -31,22 +31,6 @@ def load_user(user_id):
         session.close()
     return user
 
-
-@app.route('/test_page', strict_slashes=False, methods=['GET', 'POST'])
-@login_required
-def test_page():
-    return render_template('test_page.html')
-
-@app.route('/graph', strict_slashes=False)
-def graph():
-    dam_data = dams_data_to_dict_list()
-    df = pd.DataFrame(dam_data)
-    fig1 = px.line(df, x = 'date', y = 'dam_reading', color='dam_name', title = "Date vs Dam Reading")
-    
-    graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
-    
-    return render_template("graph.html", graph1JSON=graph1JSON)
-
 @app.route('/landing', strict_slashes=False)
 def landing():
     return render_template("landing.html")

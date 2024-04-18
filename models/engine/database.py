@@ -17,9 +17,6 @@ Session = sessionmaker(bind=engine)
 
 session = Session()
 
-
-# dams_data = session.query(Dams, DamData).join(DamData, Dams.id == DamData.dam_id).all()
-
 def dams_data_to_dict_list(dam_name=None, dam_id=None):
     """
     Convert SQLAlchemy query results into a list of dictionaries.
@@ -152,6 +149,3 @@ def current_dam_percentages(dam_name):
         current_dam_percentage = current_dam_percentage[0]
                                  
     return current_dam_percentage
-
-# session.commit()
-# session.rollback()

@@ -62,10 +62,6 @@ Contributions are welcome for this project! If you'd like to get involved, pleas
     Make your changes and commit them to your branch.
     Open a pull request to the main branch.
 
-License:
-
-This project is licensed under the MIT License
-
 Author:
 
 Dylan Artkins Mlilo - dylanmlilo12@gmail.com

@@ -40,18 +40,17 @@
   
 .graph1, .graph2, .graph3 {
     margin: 10px;
-    /* text-align: center;
-    color: whitesmoke;
-    text-shadow: 2px 2px 4px #000; */
 }
 
 .stats_data_container {
     background: rgba(174, 219, 219, 0.6);
-    width: 100%;
-    margin-top: 100px;
+    margin: 100px auto;
     border: 2px solid #948d8d;
     border-radius: 10px;
+}
 
+.stats_data_container .table-responsive {
+    margin: 10px auto; 
 }
 
 .stats_data_container:hover {
@@ -67,8 +66,9 @@
     float: right;
 }
 
-.stats_data_container .update-btn.btn {
+.stats_data_container .update-btn.btn, .stats_data_container .btn-danger.btn {
     margin-right: 5px;
+    margin-top: 5px;
 }
 
 .stats_data_container .back-btn {
@@ -135,7 +135,7 @@
 .logadmin_container {
     background: linear-gradient(to right, rgba(47, 182, 182, 0.767), rgba(47, 182, 182, 0.6), rgba(47, 182, 182, 0.767));
     width: 80%;
-    margin: 135px auto;
+    margin: 40px auto ;
     border-radius: 20px;
     color: whitesmoke;
     text-shadow: 1px 1px 2px #000;
@@ -227,6 +227,11 @@
         font-size: 3.4rem;
     }
 
+    .stats_data_container {
+        width: 95%;
+        font-size: 0.8rem;
+    }
+
     .graphs_container #graph1 .plot-container.plotly .user-select-none.svg-container {
         width: 320px;
     }
@@ -286,6 +291,11 @@
         background: rgb(199, 235, 247);
     }
 
+    .stats_data_container {
+        width: 95%;
+        font-size: 0.9rem;
+    }
+
     .admin_nav {
         margin-top: 10px;
         width: 200px;
@@ -325,6 +335,10 @@
         font-size: 2rem;
     }
 
+    .stats_data_container {
+        width: 95%;
+    }
+
     .gauge_charts_container {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -359,6 +373,11 @@
 }
 
 @media (min-width: 992px) {
+
+    .stats_data_container {
+        width: 90%;
+    }
+
     .dropdown:hover .dropdown-menu {
         display: block;
     }

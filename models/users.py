@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, Float, Date, PrimaryKeyConstraint, DECIMAL
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import declarative_base
 from flask_login import UserMixin
 

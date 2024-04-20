@@ -1,20 +1,17 @@
 body {
-    margin: 0!important;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
-    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main {
+    margin-top: 70px;
+    text-align: center;
     min-height: 100%;
-    /* Set minimum height for content area */
-    /* padding-bottom: footer-height; */
-    /* display: flex; */
-    /* min-height: 100vh; */
-}
-
-main {
-  margin-top: 70px;
-  margin-bottom: 0px;
-  text-align: center;
-  min-height: 100%;
+    flex: 1;
 }
 
 .main-heading {

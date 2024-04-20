@@ -6,55 +6,52 @@
 
 {% block content %}
 
-<div class="container stats_data_container">
+<div class="stats_data_container">
   <div class="row">
-    <div class="col md-12">
-      <div class="jumbotron data_container p-3">
-        <h2 class="left-aligned-text"> Dams Data 
-          <a href="/admin_dashboard" class="btn btn-secondary back-btn float-right">Back</a>
-          <button type="button" class="btn btn-success float-right"
-            data-toggle="modal" data-target="#myDamModal"> Add New Data </button>
-        </h2>
+      <div class="col md-12">
+          <div class="jumbotron data_container p-3">
+              <h2 class="left-aligned-text">Dams Data
+                  <a href="/admin_dashboard" class="btn btn-secondary back-btn float-right">Back</a>
+                  <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#myDamModal">Add New Data</button>
+              </h2>
 
-        <table class="table table-hover table-bordered">
+              <div class="table-responsive">
+                  <table class="table table-hover table-bordered">
+                      <tr class="table-dark">
+                          <th>ID</th>
+                          <th>Dam Name</th>
+                          <th>Date</th>
+                          <th>Dam Reading</th>
+                          <th>Dam Percentage</th>
+                          <th>Dam Volume</th>
+                          <th>Daily Inflow</th>
+                          <th>Action</th>
+                      </tr>
 
-          <tr class="table-dark">
-            <th>ID</th>
-            <th>Dam Name</th>
-            <th>Date</th>
-            <th>Dam Reading</th>
-            <th>Dam Percentage</th>
-            <th>Dam Volume</th>
-            <th>Daily Inflow</th>
-            <th>Action</th>
-          </tr>
+                      {% for dam_data in dam_data_list %}
+                      <tr class="table-dark {% if loop.index % 2 == 1 %}table-active{% else %}{% endif %}">
+                          <td>{{ dam_data.id }}</td>
+                          <td>{{ dam_data.dam_name }}</td>
+                          <td>{{ dam_data.date }}</td>
+                          <td>{{ dam_data.dam_reading }}</td>
+                          <td>{{ dam_data.dam_percentage }}</td>
+                          <td>{{ dam_data.dam_volume }}</td>
+                          <td>{{ dam_data.daily_inflow }}</td>
 
-          {% for dam_data in dam_data_list %}
-          <tr class=" table-dark {% if loop.index % 2 == 1 %}table-active{% else %}{% endif %}">  <td> {{ dam_data.id }} </td>
-            <td> {{ dam_data.dam_name }} </td>
-            <td> {{ dam_data.date }} </td>
-            <td> {{ dam_data.dam_reading }} </td>
-            <td> {{ dam_data.dam_percentage }}</td>
-            <td> {{ dam_data.dam_volume }} </td>
-            <td> {{ dam_data.daily_inflow }} </td>
+                          <td>
+                              <a href="/delete_dam_data/{{ dam_data.id }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                              <a href="/update_dam_data/{{ dam_data.id }}" class="btn btn-warning btn-xs update-btn" data-toggle="modal" data-target="#updateDamModal{{ dam_data.id }}">Edit</a>
+                          </td>
+                      </tr>
 
-            <td> 
-              <a href="/delete_dam_data/{{ dam_data.id }}" class="btn btn-danger btn-xs"
-                onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
-              <a href="/update_dam_data/{{ dam_data.id }}" class="btn btn-warning btn-xs update-btn"
-                data-toggle="modal" data-target="#updateDamModal{{ dam_data.id }}">Edit</a>
-            </td>
-          </tr>
-
-          {% include "add_dam_modal.html" %}
-          {% include "update_dam_modal.html" %}
-          {% endfor %}
-
-        </table>
-        <a href="/admin_dashboard" class="btn btn-secondary back-btn float-right">Back</a>
+                      {% include "add_dam_modal.html" %}
+                      {% include "update_dam_modal.html" %}
+                      {% endfor %}
+                  </table>
+              </div>
+              <a href="/admin_dashboard" class="btn btn-secondary back-btn float-right">Back</a>
+          </div>
       </div>
-    </div>
   </div>
 </div>
-
 {% endblock %}

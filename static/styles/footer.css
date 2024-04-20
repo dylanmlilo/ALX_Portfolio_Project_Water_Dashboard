@@ -1,20 +1,26 @@
-.footer {
-    position: absolute;
-    bottom: 0;
+footer {
+    background: rgba(3, 3, 126, 0.849);
     width: 100%;
-    background: rgba(5, 59, 141, 0.767);
-  }
-
-.footer a, .footer p {
-    color: whitesmoke!important;
+    border-top: 1px solid gray;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    color: #fff;
 }
 
-.footer .vision {
-    font-size: x-large;
-    text-shadow: 1px 1px 4px #000;
+footer .nav-link {
+    font-size: 1.1rem;
+    color: #cfc7c7;
 }
 
-.footer .nav {
-    margin-top: 10px;
-    font-size: larger;
+.vision {
+    font-size: 1.7rem;
 }
+
+.copyright {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #cfc7c7;
+}
+
+

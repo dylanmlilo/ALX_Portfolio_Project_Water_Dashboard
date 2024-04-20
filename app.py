@@ -1,16 +1,11 @@
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for, flash
-from flask_login import LoginManager, login_required, UserMixin, login_user, logout_user, current_user
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from models.engine.database import session, dams_data_to_dict_list, reservoir_data_to_dict_list, current_reservoir_levels, current_dam_percentages
 from models.users import Users
 from models.login import LoginForm
 from models.dams import Dams, DamData
 from models.reservoirs import Reservoirs, ReservoirData
 from models.plot_functions import today_date, plot_reservoir_level_charts, plot_dam_level_charts, plot_home_page_charts
-import pandas as pd
-import json
-import plotly
-import plotly_express as px
-import plotly.graph_objects as go
 import os
 from dotenv import load_dotenv
 
@@ -45,33 +40,6 @@ def load_user(user_id):
         session.close()
     return user
 
-@app.route('/landing', strict_slashes=False)
-def landing():
-    """
-    Renders the landing page template.
-
-    Returns:
-        flask.Response: The rendered landing page template.
-    """
-    return render_template("landing.html")
-
-
-@app.route('/', strict_slashes=False)
-def index():
-    """
-    Renders the home page template with the necessary data and charts.
-
-    Returns:
-        flask.Response: The rendered home page template.
-    """
-    graph1JSON, graph2JSON, gauge_reservoir_json, gauge_dam_json = plot_home_page_charts()
-    
-    date = today_date()
-    
-    return render_template("home.html", graph1JSON=graph1JSON,
-                           graph2JSON=graph2JSON,gauge_dam_json=gauge_dam_json,
-                           gauge_reservoir_json=gauge_reservoir_json, date=date)
-
 
 @app.route('/login', strict_slashes=False, methods=['GET', 'POST'])
 def login():
@@ -79,7 +47,8 @@ def login():
     Renders the login page template and handles user login.
 
     Returns:
-        flask.Response: The rendered login page template or a redirect to the admin dashboard.
+        flask.Response: The rendered login page template or a redirect
+        to the admin dashboard.
     """
     form = LoginForm()
     if form.validate_on_submit():
@@ -106,6 +75,35 @@ def logout():
     """
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route('/', strict_slashes=False)
+def index():
+    """
+    Renders the home page template with the necessary data and charts.
+
+    Returns:
+        flask.Response: The rendered home page template.
+    """
+    graph1JSON, graph2JSON, gauge_reservoir_json, gauge_dam_json = plot_home_page_charts()
+    
+    date = today_date()
+    
+    return render_template("home.html", graph1JSON=graph1JSON,
+                           graph2JSON=graph2JSON,gauge_dam_json=gauge_dam_json,
+                           gauge_reservoir_json=gauge_reservoir_json, date=date)
+
+
+@app.route('/about', strict_slashes=False)
+def landing():
+    """
+    Renders the landing page template.
+
+    Returns:
+        flask.Response: The rendered landing page template.
+    """
+    return render_template("landing.html")
+
 
 @app.route("/admin_dashboard", strict_slashes=False)
 @login_required
@@ -497,4 +495,4 @@ def PumpingStatistics():
 
                
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

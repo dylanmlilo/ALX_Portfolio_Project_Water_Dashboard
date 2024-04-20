@@ -10,6 +10,7 @@ load_dotenv()
 
 db_connection_string = os.getenv("db_connection_string")
 
+
 engine = create_engine(db_connection_string)
 
 Session = sessionmaker(bind=engine)
@@ -142,13 +143,13 @@ def current_reservoir_levels(reservoir_name):
 
 def current_dam_percentages(dam_name):
     """
-    Retrieves the current percentage of a dam for the given dam name.
+    Retrieves the current dam percentage for the given dam name.
 
     Args:
         dam_name (str): The name of the dam.
 
     Returns:
-        float or None: The current percentage of the dam if found, None otherwise.
+        float or None: The current dam percentage if found, None otherwise.
     """
     try:
         current_dam_percentage = session.query(DamData.dam_percentage) \

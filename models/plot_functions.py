@@ -149,8 +149,6 @@ def plot_home_page_charts():
         
     gauge_reservoir_json = [json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) for fig in gauge_reservoir_figures]
     
-    
-    
     try:
         dam_names = session.query(Dams.dam_name).all()
     except:
@@ -161,7 +159,12 @@ def plot_home_page_charts():
     
     gauge_dam_figures = []
     for dam_name in dam_names:
-        dam = session.query(Dams).filter(Dams.dam_name == dam_name).first()
+        try:
+            dam = session.query(Dams).filter(Dams.dam_name == dam_name).first()
+        except:
+            session.rollback()
+        finally:
+            session.close()
         try:
             current_level = current_dam_percentages(dam_name)
             maximum_level = 100
